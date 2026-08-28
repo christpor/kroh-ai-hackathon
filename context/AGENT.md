@@ -1,27 +1,97 @@
-# 🧠 AGENT.md — Master Project Brain & Active Ventures Ledger
+# 🧠 AGENT.md — Master Brain & Cognitive Architecture
 
-## 📌 Active Ventures Portfolio (Cambodia 2026)
-
-### 1. 🛡️ Venture 1: KROH (ក្រោះ) — Real-Time Citizen Anti-Scam Shield
-- **Team:** **Team CHBAS (ច្បាស់ ច្បាស់)** — AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026).
-- **Team Roster:** Christpor Rin (AI Engineer & Team Lead), 2 Data Scientists (NLP & Risk Algorithm), 1 Software Engineer (Supabase & APIs).
-- **Private Repo:** [https://github.com/christpor/kroh-ai-hackathon](https://github.com/christpor/kroh-ai-hackathon)
-- **Live Slide Deck:** [https://my-idea-for-hackathon.vercel.app](https://my-idea-for-hackathon.vercel.app)
-- **Master Startup Pack:** `/home/christ/projects/my-idea-for-hackathon/STARTUP_PACK_KROH.md`
-- **Core Architecture:** Multimodal Telegram Bot (`@KrohShieldBot`) + Gemini 3.1 Lite (Khmer voice/text/vision) + Cyber domain threat heuristics + Live Community Threat Radar dashboard on Vercel.
-- **Monetization:** Free for citizens + B2B Threat Intelligence API ($500–$2,500/mo) for commercial banks (ABA, Wing, ACLEDA).
-
-### 2. 🧾 Venture 2: KhQR Shield & Books — $0 Counter Anti-Fraud & GDT CIFRS Tax Ledger
-- **Target Market:** 500,000+ Cambodian MSMEs (cafes, bubble tea, street vendors).
-- **Public Repo:** [https://github.com/christpor/khqr-shield-pitch](https://github.com/christpor/khqr-shield-pitch)
-- **Live Pitch Deck:** [https://khqr-shield-pitch.vercel.app](https://khqr-shield-pitch.vercel.app)
-- **Live Stand Scanner:** [https://khqr-shield-pitch.vercel.app/scanner](https://khqr-shield-pitch.vercel.app/scanner)
-- **Master Recreate Prompt:** `/home/christ/projects/khqr-shield-pitch/RECREATE_PROMPT.md`
-- **Core Architecture:** Web camera stand scanner + 300ms Gemini 3.1 Lite forensic OCR + GDT CIFRS tax ledger export + Data Science recipe inventory forecasting.
+<p align="center">
+  <strong>The Autonomous Venture Engine & Context Contract for Christpor Rin</strong><br>
+  <em>Version 4.2 • Updated August 2026 • Phnom Penh, Cambodia</em>
+</p>
 
 ---
 
-## 🎯 Ground Truth Rules & Constraints
-1. **Model Routing:** Prefer fast, micro-cost models (`Gemini 3.1 Lite` / `Gemini 3.5 Lite` / `Gemini 2.5 Flash`) at temperature 0.0–0.1 for sub-250ms structured JSON outputs.
-2. **Visual Standards:** Pure white (`#ffffff`), single emerald accent (`#059669`), `Kantumruy Pro` font (weight 600, line-height 1.45).
-3. **Deployment Gate:** Always build cleanly (`npm run build`), push to GitHub (`gh`), and alias to production on Vercel.
+## 📌 1. OPERATOR IDENTITY & PROFILE
+
+```yaml
+Operator: Christpor Rin (Christ / Por)
+Title: AI Engineer, Agentic Full-Stack Builder & Team Lead
+Active Team: Team CHBAS (ច្បាស់ ច្បាស់)
+Location: Phnom Penh, Cambodia (Asia/Phnom_Penh | UTC+7)
+Primary Target: AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026)
+```
+
+---
+
+## 🏛️ 2. ACTIVE VENTURES PORTFOLIO (2026)
+
+### 🛡️ Venture 1: KROH (ក្រោះ) — Autonomous Citizen Anti-Scam Shield
+> **"Protecting 17M Cambodians from Telegram scams, fake loans, and cloned bank logins in sub-300ms."**
+
+- **Team:** **Team CHBAS (ច្បាស់ ច្បាស់)** — 4 Engineers (Christpor: AI Lead + 2 Data Scientists + 1 Software Engineer).
+- **Private Repository:** [`github.com/christpor/kroh-ai-hackathon`](https://github.com/christpor/kroh-ai-hackathon) (Private)
+- **Live Presentation Deck:** [`my-idea-for-hackathon.vercel.app`](https://my-idea-for-hackathon.vercel.app)
+- **Startup Master Pack:** [`STARTUP_PACK_KROH.md`](file:///home/christ/projects/my-idea-for-hackathon/STARTUP_PACK_KROH.md) (G0 Brief, ICP, JTBD, PRD, B2B Threat API)
+- **Core Engine:**
+  ```mermaid
+  graph LR
+    User[Citizen on Telegram] -->|Forward Link / Voice / Image / APK| Bot[KROH Bot Gateway]
+    Bot -->|Domain & SSL Check| Cyber[Cyber Threat Engine]
+    Bot -->|Khmer Multimodal NLP| Gemini[Gemini 3.1 Lite AI]
+    Cyber & Gemini --> DB[(Supabase PostgreSQL)]
+    Gemini -->|200ms Voice/Text Alert| User
+    DB -->|Real-Time Threat Stream| Radar[Live Web Threat Radar]
+  ```
+
+---
+
+### 🧾 Venture 2: KhQR Shield & Books — $0 Counter Anti-Fraud & GDT Tax OS
+> **"Transforming any smartphone into a 300ms fraud scanner and automated GDT CIFRS bookkeeping terminal for 500k MSMEs."**
+
+- **Target Market:** 500,000+ Cambodian cafes, bubble tea shops, and street counters.
+- **Public Repository:** [`github.com/christpor/khqr-shield-pitch`](https://github.com/christpor/khqr-shield-pitch) (Public)
+- **Live Pitch Deck:** [`khqr-shield-pitch.vercel.app`](https://khqr-shield-pitch.vercel.app)
+- **Live Stand Scanner:** [`khqr-shield-pitch.vercel.app/scanner`](https://khqr-shield-pitch.vercel.app/scanner)
+- **Master Recreate Prompt:** [`RECREATE_PROMPT.md`](file:///home/christ/projects/khqr-shield-pitch/RECREATE_PROMPT.md)
+- **Core Engine:**
+  - 📱 **$0 Hardware Stand Scanner:** Web camera OCR reading Bakong EMVCo checksums in 300ms.
+  - 📊 **2026 GDT CIFRS Tax Ledger:** 1-click double-entry accounting export.
+  - 🥛 **Data Science Inventory Velocity:** Predicts milk, coffee beans, and ingredient stockouts 48h early.
+
+---
+
+## ⚡ 3. NON-NEGOTIABLE TECHNICAL STANDARDS
+
+| Standard | Rule & Implementation |
+| :--- | :--- |
+| **Model Discipline** | Default to **Gemini 3.1 Lite / 3.5 Lite / 2.5 Flash** (sub-250ms latency, $0.0001/call, Temperature: 0.0–0.1). Zero heavy model bloat. |
+| **Design Aesthetic** | Pure White (`#ffffff`), soft slate surface (`#f8fafc`), single emerald accent (`#059669`), tight tracking. Zero rainbow AI slop. |
+| **Khmer Typography** | Font: `Kantumruy Pro` | Weight: **600 (Semibold)** | Line-height: **`leading-[1.45]`** (Prevents vowel mark clipping). |
+| **Code & Stack** | **TypeScript (Strict)**, React 18, Vite, Tailwind CSS, Node.js Telegraf, Supabase PostgreSQL, Vercel CLI. |
+| **Testing & Deployment** | Zero code ships untested (`npm run build`). Every milestone is pushed via `gh` and deployed to production on Vercel. |
+
+---
+
+## 🧰 4. APPROVED AGENT SKILLS ARSENAL
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│  • ai-engineer-christ             -> Zero-Trust Prompts & AXIOM v3.1     │
+│  • research-cam                   -> Cambodian Legal, MPTC, Tax & Bakong │
+│  • pushback-engineer-christ       -> Project-Grounded Critique & Evals   │
+│  • web-vibe & vibe-design         -> Apple-Grade White-Theme UI Design   │
+│  • slide-gen                      -> Bilingual KH/EN HTML Slide Decks    │
+│  • startup-documentation-auditor  -> Silicon-Valley Startup Pack Specs   │
+│  • readme-builder-por             -> Elite READMEs & Shieldcn Visuals    │
+│  • context-engineer-por           -> Production Memory OS & Token Budget │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📂 5. COGNITIVE LAYER DIRECTORY MAP
+
+- 🤖 [`AGENTS.md`](file:///home/christ/projects/AGENTS.md) — Root Router File (≤50 lines)
+- 👤 [`context/USER.md`](file:///home/christ/projects/context/USER.md) — The Operator Profile (Christpor Rin)
+- 🔮 [`context/SOUL.md`](file:///home/christ/projects/context/SOUL.md) — AI Temperament, 7-Rung Ladder & Execution Rules
+- 🤖 [`context/IDENTITY.md`](file:///home/christ/projects/context/IDENTITY.md) — Agent Position, Role & Tool Boundaries
+- 🧠 [`context/AGENT.md`](file:///home/christ/projects/context/AGENT.md) — Master Venture Ledger & Architecture
+
+---
+*Maintained by Christpor Rin & Antigravity AI Partner • Clean, Byte-Stable Context*
