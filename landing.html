@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KROH (ក្រោះ) — Intelligence Designed To Protect</title>
   
-  <!-- Inter & Kantumruy Pro Typography -->
+  <!-- Inter, Kantumruy Pro & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kantumruy+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
 </head>
 <body>
 
-  <!-- Full-Viewport Ambient CloudFront Background Video -->
+  <!-- Full-Viewport Ambient Background Video (Plays Continuously with Zero Reload Flashing) -->
   <div class="bg">
     <video class="bg-video" autoplay muted loop playsinline>
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4" type="video/mp4">
@@ -28,94 +28,264 @@
     <div class="bg-overlay"></div>
   </div>
 
-  <!-- Single-Viewport Main Page Container -->
+  <!-- Single-Viewport App Container -->
   <div class="page">
     
-    <!-- 1. Floating Top Header -->
-    <header class="header anim" style="--d: 0.0s">
-      <!-- Circular Logo -->
-      <a href="javascript:void(0)" onclick="openView('home')" class="logo-btn" aria-label="KROH Shield Home">
+    <!-- Floating Header Navigation Bar -->
+    <header class="header">
+      <a href="#home" class="logo-btn" onclick="navigate('home', event)" aria-label="KROH Home">
         <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           <path d="M9 12l2 2 4-4"/>
         </svg>
       </a>
 
-      <!-- Desktop Floating Nav Pill -->
       <nav class="nav-pill" aria-label="Main Navigation">
-        <button onclick="openView('home')" class="nav-link active" id="navHome">Home</button>
-        <button onclick="openView('bot')" class="nav-link" id="navBot">Shield Bot</button>
-        <button onclick="openView('radar')" class="nav-link" id="navRadar">Threat Radar</button>
-        <button onclick="openView('docs')" class="nav-link" id="navDocs">Docs & API</button>
+        <a href="#home" class="nav-link active" id="nav-home" onclick="navigate('home', event)">Home</a>
+        <a href="#bot" class="nav-link" id="nav-bot" onclick="navigate('bot', event)">Shield Bot</a>
+        <a href="#radar" class="nav-link" id="nav-radar" onclick="navigate('radar', event)">Threat Radar</a>
+        <a href="#docs" class="nav-link" id="nav-docs" onclick="navigate('docs', event)">Docs & API</a>
       </nav>
 
-      <!-- Desktop Action Pill -->
-      <button onclick="openView('bot')" class="sign-in-btn">
+      <a href="https://t.me" target="_blank" class="sign-in-btn">
         <span>⚡ Launch Bot</span>
-      </button>
+      </a>
 
-      <!-- Mobile Hamburger Button (≤720px) -->
-      <button class="hamburger-btn" id="burgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+      <button class="hamburger-btn" id="burgerBtn" aria-label="Toggle Navigation">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
     </header>
 
-    <!-- 2. Centered Hero Section -->
-    <main class="hero">
+    <!-- Dynamic Center Stage (Seamless Cross-Fade Between Views) -->
+    <main class="stage-container">
       
-      <!-- Trust Avatar Row -->
-      <div class="trust-row anim" style="--d: 0.08s">
-        <div class="avatar-stack">
-          <div class="avatar a1">
-            <div class="avatar-inner">
-              <i class="fa-brands fa-telegram"></i>
-            </div>
+      <!-- ================= VIEW 1: HOME ================= -->
+      <section class="view-panel active" id="view-home">
+        <div class="trust-row">
+          <div class="avatar-stack">
+            <div class="avatar a1"><div class="avatar-inner"><i class="fa-brands fa-telegram"></i></div></div>
+            <div class="avatar a2"><div class="avatar-inner"><i class="fa-solid fa-shield-halved"></i></div></div>
+            <div class="avatar a3"><div class="avatar-inner"><i class="fa-solid fa-building-columns"></i></div></div>
           </div>
-          <div class="avatar a2">
-            <div class="avatar-inner">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
+          <div class="trust-pill">
+            <span>Protected 25,000+ Scans • National Shield</span>
           </div>
-          <div class="avatar a3">
-            <div class="avatar-inner">
-              <i class="fa-solid fa-building-columns"></i>
+        </div>
+
+        <h1 class="headline">
+          <span class="headline-line l1">INTELLIGENCE</span>
+          <span class="headline-line l2">DESIGNED TO PROTECT</span>
+        </h1>
+
+        <p class="subhead">
+          Real-time autonomous defense against phishing links, voice scams, and fraudulent APKs across Cambodia in sub-300ms.
+        </p>
+
+        <div class="cta-row">
+          <a href="#bot" onclick="navigate('bot', event)" class="cta-btn primary">
+            <span>⚡ Try Live Bot Simulator</span>
+          </a>
+          <a href="#radar" onclick="navigate('radar', event)" class="cta-btn secondary">
+            <span>🔍 View Threat Radar</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 2: SHIELD BOT SIMULATOR ================= -->
+      <section class="view-panel" id="view-bot">
+        <div class="glass-container bot-layout">
+          <div class="panel-header">
+            <div class="panel-tag text-blue"><i class="fa-brands fa-telegram"></i> TELEGRAM MULTIMODAL SHIELD</div>
+            <h2 class="panel-title">Interactive Scam Triage Simulator</h2>
+            <p class="panel-desc">Test how KROH handles real-world Cambodian attack vectors with sub-300ms Khmer verdicts.</p>
+          </div>
+
+          <div class="bot-grid">
+            <!-- Left: Attack Presets -->
+            <div class="presets-col">
+              <span class="col-lbl">Select a Test Vector:</span>
+              <button class="preset-card active" onclick="simulateScam('link', this)">
+                <div class="preset-icon text-red">🔗</div>
+                <div>
+                  <div class="preset-name">Fake ABA Bank Link</div>
+                  <div class="preset-sub">Domain spoofing (.top phishing)</div>
+                </div>
+              </button>
+
+              <button class="preset-card" onclick="simulateScam('loan', this)">
+                <div class="preset-icon text-orange">💸</div>
+                <div>
+                  <div class="preset-name">Fast Loan SMS Spam</div>
+                  <div class="preset-sub">0% interest upfront fee fraud</div>
+                </div>
+              </button>
+
+              <button class="preset-card" onclick="simulateScam('voice', this)">
+                <div class="preset-icon text-purple">🎙️</div>
+                <div>
+                  <div class="preset-name">Stranger Voice Note</div>
+                  <div class="preset-sub">OTP social engineering scam</div>
+                </div>
+              </button>
+
+              <button class="preset-card" onclick="simulateScam('clean', this)">
+                <div class="preset-icon text-emerald">✅</div>
+                <div>
+                  <div class="preset-name">Authentic Bakong QR</div>
+                  <div class="preset-sub">EMVCo checksum verified safe</div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Right: Interactive Telegram Window -->
+            <div class="tg-window">
+              <div class="tg-topbar">
+                <div class="tg-avatar"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                  <div class="tg-name">KROH Shield Bot</div>
+                  <div class="tg-status">bot • sub-300ms AI triage</div>
+                </div>
+              </div>
+
+              <div class="tg-messages" id="tgMessages">
+                <div class="msg bot">
+                  <p><strong>🛡️ KROH Shield:</strong> សួស្តី! សូម Forward សារ Link, សំឡេង ឬរូបភាព Screenshot មកទីនេះដើម្បីស្កេនពិនិត្យសុវត្ថិភាពភ្លាមៗ។</p>
+                </div>
+                <div class="msg user">
+                  <p>https://aba-bonus2026.top/claim-500usd</p>
+                </div>
+                <div class="msg alert">
+                  <p><strong>🚨 ការព្រមានកម្រិតគ្រោះថ្នាក់ខ្ពស់ (99.4% PHISHING):</strong></p>
+                  <p>• ឈ្មោះ Domain ក្លែងបន្លំធនាគារ ABA (.top TLD ទើបបង្កើតថ្មី)<br>
+                  • គោលបំណង៖ លួចលេខសម្ងាត់ Password & OTP<br>
+                  • <strong>អនុសាសន៍៖</strong> សូមកុំចុចជាដាច់ខាត!</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="trust-pill">
-          <span>Protected 25,000+ Scans • National Shield</span>
+      </section>
+
+      <!-- ================= VIEW 3: THREAT RADAR ================= -->
+      <section class="view-panel" id="view-radar">
+        <div class="glass-container radar-layout">
+          <div class="panel-header">
+            <div class="panel-tag text-red"><i class="fa-solid fa-satellite-dish"></i> LIVE NATIONAL RADAR</div>
+            <h2 class="panel-title">Real-Time Threat Telemetry</h2>
+            <p class="panel-desc">Crowdsourced threat intelligence mapping active fraud vectors across Cambodia.</p>
+          </div>
+
+          <!-- Radar Search Bar -->
+          <div class="radar-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="radarFilterInput" placeholder="Search phone number (+855), domain (.top), bank account or keyword..." onkeyup="filterRadar()">
+          </div>
+
+          <!-- Radar Live Table -->
+          <div class="radar-table-wrap">
+            <table class="radar-table">
+              <thead>
+                <tr>
+                  <th>Threat Target</th>
+                  <th>Category</th>
+                  <th>Risk Score</th>
+                  <th>Detection Channel</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="radarTableBody">
+                <tr>
+                  <td class="font-mono font-bold">aba-bonus2026.top</td>
+                  <td><span class="badge badge-red">Fake Bank Phishing</span></td>
+                  <td class="font-mono text-red font-bold">99.4%</td>
+                  <td>Telegram URL</td>
+                  <td><span class="status-pill red">BLOCKED</span></td>
+                </tr>
+                <tr>
+                  <td class="font-mono font-bold">+855 96 849 1102</td>
+                  <td><span class="badge badge-orange">Fast Loan Shark</span></td>
+                  <td class="font-mono text-orange font-bold">94.2%</td>
+                  <td>SMS Blast</td>
+                  <td><span class="status-pill red">BLOCKED</span></td>
+                </tr>
+                <tr>
+                  <td class="font-mono font-bold">BankUpdate_v2.apk</td>
+                  <td><span class="badge badge-purple">Trojan Malware</span></td>
+                  <td class="font-mono text-purple font-bold">99.9%</td>
+                  <td>Telegram Attachment</td>
+                  <td><span class="status-pill purple">QUARANTINED</span></td>
+                </tr>
+                <tr>
+                  <td class="font-mono font-bold">bakong.nbc.gov.kh</td>
+                  <td><span class="badge badge-green">Verified National System</span></td>
+                  <td class="font-mono text-emerald font-bold">0.0%</td>
+                  <td>Official Portal</td>
+                  <td><span class="status-pill green">VERIFIED SAFE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- 2-Line Retro Dot-Matrix Headline -->
-      <h1 class="headline">
-        <span class="headline-line l1">INTELLIGENCE</span>
-        <span class="headline-line l2">DESIGNED TO PROTECT</span>
-      </h1>
+      <!-- ================= VIEW 4: DOCS & API ================= -->
+      <section class="view-panel" id="view-docs">
+        <div class="glass-container docs-layout">
+          <div class="panel-header">
+            <div class="panel-tag text-emerald"><i class="fa-solid fa-code"></i> DEVELOPER & BANKING API</div>
+            <h2 class="panel-title">B2B Threat Intelligence API</h2>
+            <p class="panel-desc">Direct REST endpoints and webhooks for commercial banks, telcos, and fintechs.</p>
+          </div>
 
-      <!-- Subheadline -->
-      <p class="subhead anim" style="--d: 0.28s">
-        Real-time autonomous defense against phishing links, voice scams, and fraudulent APKs across Cambodia in sub-300ms.
-      </p>
+          <div class="docs-grid">
+            <div class="docs-left">
+              <div class="endpoint-badge">
+                <span class="http-method">POST</span>
+                <span class="http-path">https://api.kroh.kh/v1/threats/triage</span>
+              </div>
+              <p class="docs-text">
+                Commercial institutions connect their security operations center (SOC) to ingest real-time threat verdicts in under 200ms.
+              </p>
+              <div class="docs-actions">
+                <a href="https://github.com/christpor/kroh-ai-hackathon" target="_blank" class="cta-btn primary sm">
+                  <i class="fa-brands fa-github"></i> GitHub Repository
+                </a>
+                <a href="https://github.com/christpor/kroh-ai-hackathon/blob/main/STARTUP_PACK_KROH.md" target="_blank" class="cta-btn secondary sm">
+                  <i class="fa-solid fa-file-lines"></i> Startup PRD Spec
+                </a>
+              </div>
+            </div>
 
-      <!-- Action Button Row -->
-      <div class="cta-row anim" style="--d: 0.38s">
-        <button onclick="openView('bot')" class="cta-btn primary">
-          <span>⚡ Try Live Bot Simulator</span>
-        </button>
-        <button onclick="openView('radar')" class="cta-btn secondary">
-          <span>🔍 View Threat Radar</span>
-        </button>
-      </div>
+            <div class="terminal-card">
+              <div class="term-header">
+                <div class="term-dots"><span class="d red"></span><span class="d yellow"></span><span class="d green"></span></div>
+                <span class="term-title">cURL / Response Preview (180ms)</span>
+              </div>
+              <pre><code><span class="t-comment">// Request</span>
+<span class="t-kw">curl</span> -X POST https://api.kroh.kh/v1/threats/triage \
+  -H <span class="t-str">"Authorization: Bearer kroh_sec_token"</span> \
+  -d <span class="t-str">'{"url": "https://aba-bonus2026.top"}'</span>
+
+<span class="t-comment">// 200 OK Response</span>
+{
+  <span class="t-key">"verdict"</span>: <span class="t-val">"HIGH_HAZARD_PHISHING"</span>,
+  <span class="t-key">"threat_score"</span>: <span class="t-num">0.994</span>,
+  <span class="t-key">"impersonated_brand"</span>: <span class="t-val">"ABA Bank"</span>,
+  <span class="t-key">"khmer_alert"</span>: <span class="t-val">"🚨 ការព្រមាន៖ នេះជា Link ក្លែងក្លាយ!"</span>,
+  <span class="t-key">"latency_ms"</span>: <span class="t-num">184</span>
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </main>
 
-    <!-- 3. Animated Counting Stats Footer -->
+    <!-- Animated Counting Stats Footer -->
     <footer class="stats-footer">
-      
-      <div class="stat-card anim" style="--d: 0.48s">
+      <div class="stat-card">
         <div class="stat-glyph">&lt;</div>
         <div class="stat-meta">
           <div class="stat-val"><span class="count" data-target="200" data-decimals="0">0</span><span class="suffix">ms</span></div>
@@ -123,7 +293,7 @@
         </div>
       </div>
 
-      <div class="stat-card anim" style="--d: 0.56s">
+      <div class="stat-card">
         <div class="stat-glyph">%</div>
         <div class="stat-meta">
           <div class="stat-val"><span class="count" data-target="99.9" data-decimals="1">0</span><span class="suffix">%</span></div>
@@ -131,7 +301,7 @@
         </div>
       </div>
 
-      <div class="stat-card anim" style="--d: 0.64s">
+      <div class="stat-card">
         <div class="stat-glyph">*</div>
         <div class="stat-meta">
           <div class="stat-val"><span class="count" data-target="24" data-decimals="0">0</span><span class="suffix">/7</span></div>
@@ -139,230 +309,29 @@
         </div>
       </div>
 
-      <div class="stat-card anim" style="--d: 0.72s">
+      <div class="stat-card">
         <div class="stat-glyph">#</div>
         <div class="stat-meta">
           <div class="stat-val"><span class="count" data-target="17" data-decimals="0">0</span><span class="suffix">M</span></div>
           <div class="stat-label">Citizens Shielded</div>
         </div>
       </div>
-
     </footer>
 
   </div>
 
-  <!-- =========================================================================
-       MODAL 1: LIVE TELEGRAM BOT SIMULATOR
-       ========================================================================= -->
-  <div class="modal-backdrop" id="modalBot">
-    <div class="modal-sheet telegram-modal">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon-badge telegram">
-            <i class="fa-brands fa-telegram"></i>
-          </div>
-          <div>
-            <h3>KROH Shield Bot (@KrohShieldBot)</h3>
-            <p>Sub-300ms Vernacular Khmer Triage Simulator</p>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      </div>
-
-      <div class="modal-body">
-        <div class="tg-chat-window">
-          <div class="tg-bubble bot-intro">
-            <p><strong>🛡️ KROH (ក្រោះ) Shield:</strong> សួស្តី! សូម Forward សារ Link, សំឡេង, រូបភាព Screenshot ឬ File ដើម្បីស្កេនពិនិត្យសុវត្ថិភាពភ្លាមៗ។</p>
-          </div>
-          
-          <!-- Sample Preset Attack Trigger Chips -->
-          <div class="sample-chips-label">👉 ចុចតេស្តសាកល្បងសារបោកប្រាស់គំរូ (Select a Test Case):</div>
-          <div class="chips-grid">
-            <button class="test-chip" onclick="simulateScam('link')">
-              🔗 Fake ABA Reward Link
-            </button>
-            <button class="test-chip" onclick="simulateScam('loan')">
-              💸 Fake Fast Loan SMS
-            </button>
-            <button class="test-chip" onclick="simulateScam('voice')">
-              🎙️ Stranger Audio Voice Note
-            </button>
-            <button class="test-chip" onclick="simulateScam('clean')">
-              ✅ Authentic Bakong Receipt
-            </button>
-          </div>
-
-          <!-- Dynamic Chat Message Stream -->
-          <div class="chat-stream" id="chatStream"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       MODAL 2: LIVE COMMUNITY THREAT RADAR
-       ========================================================================= -->
-  <div class="modal-backdrop" id="modalRadar">
-    <div class="modal-sheet radar-modal">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon-badge radar">
-            <i class="fa-solid fa-satellite-dish"></i>
-          </div>
-          <div>
-            <h3>Live National Threat Radar</h3>
-            <p>Real-Time Intercepted Scams Across Cambodia</p>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      </div>
-
-      <div class="modal-body">
-        <!-- Search Threat Bar -->
-        <div class="threat-search-bar">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="threatInput" placeholder="Enter URL, phone number (+855), bank account, or Telegram handle..." onkeyup="filterThreats()">
-        </div>
-
-        <!-- Radar Stats Row -->
-        <div class="radar-metrics-grid">
-          <div class="metric-box">
-            <div class="metric-num text-red">1,482</div>
-            <div class="metric-lbl">Scams Blocked (24h)</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-num text-emerald">99.8%</div>
-            <div class="metric-lbl">Triage Accuracy</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-num text-blue">184ms</div>
-            <div class="metric-lbl">Avg Response Time</div>
-          </div>
-        </div>
-
-        <!-- Live Intercepted Feed Table -->
-        <div class="table-container">
-          <table class="threat-table">
-            <thead>
-              <tr>
-                <th>Threat Target</th>
-                <th>Category</th>
-                <th>Risk Score</th>
-                <th>Source Vector</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="threatTableBody">
-              <tr>
-                <td class="font-mono font-bold">aba-bonus2026.top</td>
-                <td><span class="tag red">Fake Bank Phishing</span></td>
-                <td class="font-mono text-red font-bold">99.4%</td>
-                <td>Telegram URL</td>
-                <td><span class="badge-red">BLOCKED</span></td>
-              </tr>
-              <tr>
-                <td class="font-mono font-bold">+855 96 849 1102</td>
-                <td><span class="tag orange">Fast Loan Scam</span></td>
-                <td class="font-mono text-orange font-bold">94.2%</td>
-                <td>SMS Blast</td>
-                <td><span class="badge-red">BLOCKED</span></td>
-              </tr>
-              <tr>
-                <td class="font-mono font-bold">BankUpdate_v2.apk</td>
-                <td><span class="tag purple">Trojan Malware</span></td>
-                <td class="font-mono text-purple font-bold">99.9%</td>
-                <td>Telegram File</td>
-                <td><span class="badge-red">QUARANTINED</span></td>
-              </tr>
-              <tr>
-                <td class="font-mono font-bold">bakong.nbc.gov.kh</td>
-                <td><span class="tag green">Verified National System</span></td>
-                <td class="font-mono text-green font-bold">0.0%</td>
-                <td>Official Web</td>
-                <td><span class="badge-green">VERIFIED SAFE</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       MODAL 3: DOCUMENTATION & ENTERPRISE API
-       ========================================================================= -->
-  <div class="modal-backdrop" id="modalDocs">
-    <div class="modal-sheet docs-modal">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon-badge docs">
-            <i class="fa-solid fa-code"></i>
-          </div>
-          <div>
-            <h3>KROH Developer & Bank API</h3>
-            <p>B2B Threat Intelligence Telemetry & Node.js SDK</p>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      </div>
-
-      <div class="modal-body space-y-4">
-        <p class="docs-intro-p">
-          Commercial banks (ABA, Wing, ACLEDA) and government authorities connect to the <strong>KROH Real-Time Threat Feed API</strong> to receive instant webhooks the moment a new phishing domain or spoofed account is reported in Cambodia.
-        </p>
-
-        <!-- Code Block -->
-        <div class="code-terminal">
-          <div class="terminal-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="terminal-title">POST /v1/threats/triage (Latency: 180ms)</span>
-          </div>
-          <pre><code>// cURL Request Example
-curl -X POST https://api.kroh.kh/v1/threats/triage \
-  -H "Authorization: Bearer kroh_live_sec_key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "payload_type": "URL",
-    "content": "https://aba-bonus2026.top",
-    "language": "km"
-  }'
-
-// Response (200 OK)
-{
-  "verdict": "HIGH_HAZARD_PHISHING",
-  "threat_score": 0.994,
-  "impersonated_entity": "ABA Bank",
-  "khmer_alert": "🚨 ការព្រមាន៖ នេះជា Link ក្លែងក្លាយដើម្បីលួចលេខសម្ងាត់!",
-  "recommended_action": "BLOCK_AND_REPORT"
-}</code></pre>
-        </div>
-
-        <div class="docs-footer-links">
-          <a href="https://github.com/christpor/kroh-ai-hackathon" target="_blank" class="docs-btn primary">
-            <i class="fa-brands fa-github"></i> View Private GitHub Repository
-          </a>
-          <a href="https://github.com/christpor/kroh-ai-hackathon/blob/main/STARTUP_PACK_KROH.md" target="_blank" class="docs-btn secondary">
-            <i class="fa-solid fa-file-lines"></i> Open Master Startup Pack
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Menu Overlay (≤720px) -->
+  <!-- Mobile Drawer Menu (≤720px) -->
   <div class="mobile-overlay" id="mobileOverlay">
-    <div class="mobile-sheet" id="mobileSheet">
+    <div class="mobile-sheet">
       <nav class="mobile-nav">
-        <button onclick="openView('home')" class="mobile-link active">Home</button>
-        <button onclick="openView('bot')" class="mobile-link">Shield Bot Simulator</button>
-        <button onclick="openView('radar')" class="mobile-link">Threat Radar</button>
-        <button onclick="openView('docs')" class="mobile-link">Docs & API</button>
+        <a href="#home" class="mobile-link active" onclick="navigate('home', event)">Home</a>
+        <a href="#bot" class="mobile-link" onclick="navigate('bot', event)">Shield Bot</a>
+        <a href="#radar" class="mobile-link" onclick="navigate('radar', event)">Threat Radar</a>
+        <a href="#docs" class="mobile-link" onclick="navigate('docs', event)">Docs & API</a>
       </nav>
-      <button onclick="openView('bot')" class="mobile-sign-in">
+      <a href="https://t.me" target="_blank" class="mobile-sign-in">
         <span>⚡ Launch Bot</span>
-      </button>
+      </a>
     </div>
   </div>
 
