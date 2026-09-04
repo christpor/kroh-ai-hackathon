@@ -25,9 +25,9 @@ Primary Target: AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026)
 > **"Protecting 17M Cambodians from Telegram scams, fake loans, and cloned bank logins in sub-300ms."**
 
 - **Team:** **Team CHBAS (ច្បាស់ ច្បាស់)** — 4 Engineers (Christpor: AI Lead + 2 Data Scientists + 1 Software Engineer).
-- **Private Repository:** [`github.com/christpor/kroh-ai-hackathon`](https://github.com/christpor/kroh-ai-hackathon) (Private)
-- **Live Presentation Deck:** [`my-idea-for-hackathon.vercel.app`](https://my-idea-for-hackathon.vercel.app)
-- **Startup Master Pack:** [`STARTUP_PACK_KROH.md`](file:///home/christ/projects/my-idea-for-hackathon/STARTUP_PACK_KROH.md) (G0 Brief, ICP, JTBD, PRD, B2B Threat API)
+- **Public Repository:** [`github.com/christpor/kroh-ai-hackathon`](https://github.com/christpor/kroh-ai-hackathon) (Public - Open Review)
+- **Live Presentation Deck:** [`my-idea-for-hackathon.vercel.app/slides`](https://my-idea-for-hackathon.vercel.app/slides)
+- **Startup Master Pack & PRD:** [`STARTUP_PACK_KROH.md`](file:///home/christ/projects/kroh-ai-hackathon/STARTUP_PACK_KROH.md) & [`docs/PRD.md`](file:///home/christ/projects/kroh-ai-hackathon/docs/PRD.md)
 - **Core Engine:**
   ```mermaid
   graph LR
