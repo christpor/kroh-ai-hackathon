@@ -1,0 +1,10 @@
+{
+  "id": "CAM-SLIP-007",
+  "vector": "receipt_slip",
+  "target_brand": "Bakong",
+  "payload_desc": "Fake payment slip with randomized non-existent Bakong Hash",
+  "risk_score": 98.4,
+  "verdict": "HIGH_HAZARD",
+  "forensic_flags": ["HASH_CHECKSUM_FAILURE", "FORGED_EMVCO_PAYLOAD"],
+  "alert_kh": "🚨 វិក្កយបត្របាគងក្លែងក្លាយ៖ លេខកូដ Hash ប្រតិបត្តិការមិនមានក្នុងប្រព័ន្ធទិន្នន័យជាតិឡើយ!"
+}

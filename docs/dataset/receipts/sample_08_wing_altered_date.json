@@ -1,0 +1,10 @@
+{
+  "id": "CAM-SLIP-008",
+  "vector": "receipt_slip",
+  "target_brand": "Wing Bank",
+  "payload_desc": "Reused yesterday transfer slip with photoshopped date/time",
+  "risk_score": 94.5,
+  "verdict": "HIGH_HAZARD",
+  "forensic_flags": ["TIMESTAMP_OVERLAY", "RECYCLED_RECEIPT"],
+  "alert_kh": "⚠️ ការព្រមាន៖ វិក្កយបត្រនេះជាវិក្កយបត្រចាស់ដែលត្រូវបានកែប្រែកាលបរិច្ឆេទ និងម៉ោង!"
+}

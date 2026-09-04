@@ -1,0 +1,12 @@
+{
+  "id": "CAM-URL-002",
+  "vector": "phishing_url",
+  "target_brand": "Wing Bank",
+  "payload": "https://wing-fastloan88.cc/apply",
+  "tld": ".cc",
+  "domain_age_days": 4,
+  "risk_score": 98.2,
+  "verdict": "HIGH_HAZARD",
+  "heuristic_flags": ["UNTRUSTED_TLD", "AGE_UNDER_7_DAYS", "UNAUTHORIZED_LOAN"],
+  "alert_kh": "🚨 ការព្រមាន៖ នេះជាវេបសាយកម្ចីក្លែងក្លាយដែលប្រើឈ្មោះធនាគារ វីង ដើម្បីទារប្រាក់កក់មុន! ធនាគារពិតប្រាកដមិនដែលទារលុយមុនឱ្យកម្ចីទេ។"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "CAM-SLIP-010",
+  "vector": "khqr",
+  "target_brand": "Bakong KHQR",
+  "payload_desc": "Counterfeit sticker pasted over shop counter KHQR directing to scammer account",
+  "risk_score": 99.1,
+  "verdict": "HIGH_HAZARD",
+  "forensic_flags": ["ACCOUNT_BLACKLIST_HIT", "SUSPICIOUS_MERCHANT_NAME"],
+  "alert_kh": "🚨 គ្រោះថ្នាក់៖ កូដ QR នេះត្រូវបានបន្លំផ្លាស់ប្តូរលេខគណនីទៅកាន់ជនខិលខូច! សូមផ្ទៀងផ្ទាត់ឈ្មោះម្ចាស់ហាងមុននឹងចុចផ្ទេរ។"
+}

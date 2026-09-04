@@ -1,0 +1,9 @@
+{
+  "id": "CAM-SOC-019",
+  "vector": "social_engineering",
+  "target_brand": "Fake Telegram Escrow Bot",
+  "payload_text": "ដើម្បីទិញទំនិញ ឬ Channel Telegram នេះប្រកបដោយសុវត្ថិភាព សូមប្រើប្រាស់ Escrow Bot កណ្តាល @SafeTradeKhBot។ សូមផ្ទេរប្រាក់ $150 ចូល Bot ដើម្បីតម្កល់ទុក!",
+  "risk_score": 97.8,
+  "verdict": "HIGH_HAZARD",
+  "alert_kh": "🚨 Bot ធានាប្រាក់ក្លែងក្លាយ៖ Bot នេះជា Bot បង្កើតដោយជនខិលខូចផ្ទាល់ខ្លួនដើម្បីបន្លំយកលុយតម្កល់របស់អ្នក!"
+}

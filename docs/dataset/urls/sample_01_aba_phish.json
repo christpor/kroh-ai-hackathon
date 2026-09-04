@@ -1,0 +1,12 @@
+{
+  "id": "CAM-URL-001",
+  "vector": "phishing_url",
+  "target_brand": "ABA Bank",
+  "payload": "https://aba-bonus2026.top/claim-reward",
+  "tld": ".top",
+  "domain_age_days": 2,
+  "risk_score": 99.4,
+  "verdict": "HIGH_HAZARD",
+  "heuristic_flags": ["UNTRUSTED_TLD", "AGE_UNDER_7_DAYS", "BRAND_SPOOFING"],
+  "alert_kh": "🚨 ការព្រមាន៖ នេះជា Link ក្លែងបន្លំធនាគារ ABA ដើម្បីលួច Password និងគណនីរបស់អ្នក! សូមកុំចុច ឬបញ្ចូលលេខសម្ងាត់ឱ្យសោះ។"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "CAM-SOC-016",
+  "vector": "social_engineering",
+  "target_brand": "Work From Home / TikTok Part-time",
+  "payload_text": "ស្វាគមន៍មកកាន់ការងារ Part-time តាមទូរស័ព្ទ! គ្រាន់តែចុច Like វីដេអូ TikTok និង Follow គណនី ទទួលបានប្រាក់ $20-$50 ក្នុងមួយថ្ងៃ។ ដើម្បីចាប់ផ្តើម សូមដាក់ប្រាក់តម្កល់កិច្ចសន្យា $50 ទៅកាន់គណនីនេះ!",
+  "risk_score": 98.9,
+  "verdict": "HIGH_HAZARD",
+  "alert_kh": "🚨 ការងារបោកប្រាស់តាមអនឡាញ (Task Scam)៖ ក្រុមហ៊ុនការងារស្របច្បាប់មិនដែលតម្រូវឱ្យបុគ្គលិកបង់ប្រាក់កក់មុននឹងធ្វើការឡើយ!"
+}

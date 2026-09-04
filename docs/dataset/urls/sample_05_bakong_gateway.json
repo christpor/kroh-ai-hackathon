@@ -1,0 +1,12 @@
+{
+  "id": "CAM-URL-005",
+  "vector": "phishing_url",
+  "target_brand": "NBC Bakong",
+  "payload": "https://bakong-payment-auth.online/qr",
+  "tld": ".online",
+  "domain_age_days": 5,
+  "risk_score": 98.9,
+  "verdict": "HIGH_HAZARD",
+  "heuristic_flags": ["UNOFFICIAL_DOMAIN", "BAKONG_SPOOF"],
+  "alert_kh": "🚨 ការព្រមាន៖ នេះមិនមែនជាច្រកទូទាត់ផ្លូវការរបស់ប្រព័ន្ធបាគង (NBC Bakong) ឡើយ! ហាមស្កេន ឬផ្ទេរប្រាក់តាម Link នេះ។"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "CAM-URL-003",
+  "vector": "phishing_url",
+  "target_brand": "ACLEDA Bank",
+  "payload": "https://acleda-toanct.vip/login",
+  "tld": ".vip",
+  "domain_age_days": 1,
+  "risk_score": 99.8,
+  "verdict": "HIGH_HAZARD",
+  "heuristic_flags": ["UNTRUSTED_TLD", "BRAND_HOMOGLYPH", "AGE_UNDER_7_DAYS"],
+  "alert_kh": "🚨 ការព្រមាន៖ នេះជា Link ក្លែងបន្លំ ACLEDA ToanChet! ជនខិលខូចព្យាយាមលួចយក PIN ៦ខ្ទង់របស់អ្នក។"
+}

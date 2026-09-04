@@ -1,0 +1,10 @@
+{
+  "id": "CAM-SLIP-006",
+  "vector": "receipt_slip",
+  "target_brand": "ABA Bank",
+  "payload_desc": "Altered amount from $5.00 to $500.00 using edited font overlay",
+  "risk_score": 96.0,
+  "verdict": "HIGH_HAZARD",
+  "forensic_flags": ["FONT_MISALIGNMENT", "TEXT_PIXEL_ARTEFACTS", "INVALID_TRANSACTION_ID"],
+  "alert_kh": "🚨 ការព្រមានសម្រាប់អ្នកលក់៖ វិក្កយបត្រ ABA នេះត្រូវបានកាត់តកែប្រែចំនួនទឹកប្រាក់! សូមឆែកមើលទឹកប្រាក់ក្នុង App ធនាគារផ្ទាល់ខ្លួនជាមុនសិន មុននឹងប្រគល់ទំនិញ។"
+}

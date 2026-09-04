@@ -1,0 +1,12 @@
+{
+  "id": "CAM-URL-004",
+  "vector": "phishing_url",
+  "target_brand": "Telegram Premium",
+  "payload": "https://t-gift-free2026.top/claim",
+  "tld": ".top",
+  "domain_age_days": 3,
+  "risk_score": 97.5,
+  "verdict": "HIGH_HAZARD",
+  "heuristic_flags": ["DISPOSABLE_TLD", "TELEGRAM_SESSION_THEFT"],
+  "alert_kh": "🚨 ការព្រមាន៖ កុំចុចលើ Link នេះឱ្យសោះ! នេះជាល្បិចបោកថា 'ជូន Telegram Premium' ដើម្បីលួចយកគណនី Telegram របស់អ្នកទៅបោកមិត្តភក្តិបន្ត។"
+}

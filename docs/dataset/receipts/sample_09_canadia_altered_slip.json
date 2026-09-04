@@ -1,0 +1,10 @@
+{
+  "id": "CAM-SLIP-009",
+  "vector": "receipt_slip",
+  "target_brand": "Canadia Bank",
+  "payload_desc": "Altered receiver name and account number",
+  "risk_score": 95.2,
+  "verdict": "HIGH_HAZARD",
+  "forensic_flags": ["MISMATCHED_LINE_SPACING", "NON_STANDARD_FONT"],
+  "alert_kh": "🚨 វិក្កយបត្រកាត់ត៖ ឈ្មោះអ្នកទទួល និងលេខគណនីមានស្នាមកាត់តកែប្រែមិនស្មើជួរ!"
+}
