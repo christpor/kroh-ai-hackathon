@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="km" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team CHBAS — 4-Member Scam Research & NotebookLM Architecture | KROH (ក្រោះ)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Kantumruy+Pro:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #10B981;
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --secondary: #06B6D4;
+            --accent: #F59E0B;
+            --danger: #EF4444;
+            --bg-color: #070A12;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --text-primary: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: rgba(16, 185, 129, 0.25);
+            --bg-gradient: radial-gradient(circle at 50% 15%, #064e3b 0%, #070a12 85%);
+            --code-bg: #0B1120;
+        }
+    
+        [data-theme="light"] {
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.2);
+            --secondary: #0284C7;
+            --accent: #D97706;
+            --danger: #DC2626;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-muted: #475569;
+            --border-color: rgba(5, 150, 105, 0.25);
+            --bg-gradient: radial-gradient(circle at 50% 15%, #ECFDF5 0%, #F1F5F9 85%);
+            --code-bg: #F1F5F9;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background-color: var(--bg-color); background-image: var(--bg-gradient);
+            color: var(--text-primary); font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+            overflow: hidden; transition: all 0.3s ease; line-height: 1.45;
+        }
+        
+        h1, h2, h3, h4 { font-family: 'Kantumruy Pro', 'Outfit', sans-serif; font-weight: 700; }
+        
+        .slide-container {
+            width: 1280px; height: 720px; position: relative;
+            background: var(--card-bg); backdrop-filter: blur(28px);
+            border-radius: 20px; border: 1px solid var(--border-color);
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.7); overflow: hidden;
+        }
+        
+        .slide {
+            display: none; width: 100%; height: 100%; padding: 40px 50px;
+            flex-direction: column; justify-content: space-between;
+        }
+        .slide.active { display: flex; animation: fadeIn 0.3s ease-out; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .slide-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;
+        }
+        .brand-badge {
+            display: inline-flex; align-items: center; gap: 8px; font-weight: 700;
+            font-size: 0.95rem; color: var(--primary); letter-spacing: 0.5px;
+        }
+        .slide-counter { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+        
+        .content-split {
+            display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 30px;
+            height: calc(100% - 110px); align-items: stretch;
+        }
+        
+        .panel-left {
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .panel-right {
+            background: rgba(16, 185, 129, 0.03); border: 1px dashed var(--border-color);
+            border-radius: 16px; padding: 22px; display: flex; flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .slide-title { font-size: 1.85rem; color: var(--text-primary); margin-bottom: 6px; }
+        .slide-subtitle { color: var(--primary); font-size: 1.05rem; font-weight: 600; margin-bottom: 16px; }
+        
+        .spec-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .spec-item {
+            padding: 10px 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.92rem;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .spec-icon { color: var(--primary); font-weight: bold; flex-shrink: 0; margin-top: 2px; }
+        
+        .prompt-preview-card {
+            background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border-color);
+            padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;
+            overflow: hidden;
+        }
+        .prompt-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+        }
+        .prompt-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Menlo', monospace; font-size: 0.82rem;
+            color: var(--text-primary); line-height: 1.5; overflow-y: auto; max-height: 250px;
+            padding-right: 6px; white-space: pre-wrap;
+        }
+        
+        .btn-action {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--primary); color: #042f2e; font-weight: 700; font-size: 0.95rem;
+            padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer;
+            transition: all 0.2s ease; text-decoration: none; margin-top: 14px;
+        }
+        .btn-action:hover {
+            transform: translateY(-2px); box-shadow: 0 10px 25px -5px var(--primary-glow);
+            filter: brightness(1.1);
+        }
+        .btn-action.copied {
+            background: #059669; color: #FFFFFF;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.06); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.12);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+        
+        .slide-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 10px;
+        }
+        .shortcut-hint { font-size: 0.8rem; color: var(--text-muted); }
+        .controls-row { display: flex; gap: 10px; }
+        .nav-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-primary); width: 38px; height: 38px; border-radius: 8px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; transition: all 0.2s;
+        }
+        .nav-btn:hover { background: var(--primary); color: #042f2e; }
+        .theme-toggle-btn {
+            padding: 0 14px; width: auto; font-size: 0.85rem; font-weight: 600;
+        }
+
+        .hero-layout {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; height: 100%; gap: 20px;
+        }
+        .hero-title { font-size: 2.7rem; line-height: 1.25; color: var(--text-primary); max-width: 950px; }
+        .hero-title span { color: var(--primary); }
+        .hero-sub { color: var(--text-muted); font-size: 1.2rem; max-width: 800px; line-height: 1.6; }
+        .role-grid-preview {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; width: 100%; margin-top: 10px;
+        }
+        .role-chip {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 14px 10px; text-align: center;
+        }
+        .role-chip-num { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+        .role-chip-title { font-size: 0.92rem; font-weight: 700; margin-top: 4px; }
+        .role-chip-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+        .modal-overlay {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 7, 13, 0.88); backdrop-filter: blur(12px);
+            z-index: 100; justify-content: center; align-items: center; padding: 40px;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease-out; }
+        .modal-box {
+            background: var(--card-bg); border: 1px solid var(--primary);
+            border-radius: 16px; width: 850px; max-height: 90%; overflow-y: auto;
+            padding: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+        }
+        .modal-close {
+            float: right; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);
+            border: none; background: transparent; line-height: 1;
+        }
+        .modal-close:hover { color: var(--danger); }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <!-- SLIDE 1: HERO -->
+    <div class="slide active" id="slide-1">
+        <div class="slide-header">
+            <div class="brand-badge">🛡️ TEAM CHBAS (ច្បាស់ ច្បាស់) • KROH (ក្រោះ)</div>
+            <div class="slide-counter">SLIDE 01 / 06</div>
+        </div>
+        <div class="hero-layout">
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px;">
+                AUPP - ITM Innovation Hackathon 2026 • Research Engine
+            </div>
+            <h1 class="hero-title">
+                ការស្រាវជ្រាវឧក្រិដ្ឋកម្មបច្ចេកវិទ្យា <span>៤ ទិសដៅ</span><br>
+                NotebookLM 4-Way Swarm Architecture
+            </h1>
+            <p class="hero-sub">
+                បែងចែកប្រធានបទដាច់ដោយឡែកពីគ្នា (Orthogonal Split) សម្រាប់សមាជិកទាំង ៤ នាក់ ដើម្បីប្រមូលទិន្នន័យពិត បង្កើតមូលដ្ឋានទិន្នន័យ 20 ករណីជាក់ស្តែង និងត្រៀមឈ្នះពានរង្វាន់ Hackathon។
+            </p>
+            <div class="role-grid-preview">
+                <div class="role-chip">
+                    <div class="role-chip-num">Member 1 • Christpor</div>
+                    <div class="role-chip-title">Phishing & Domains</div>
+                    <div class="role-chip-desc">ABA/Wing Clones, .top/.cc, Sub-250ms Gateway</div>
+                </div>
+                <div class="role-chip">
+                    <div class="role-chip-num">Member 2 • Data Science</div>
+                    <div class="role-chip-title">Khmer NLP & Voice</div>
+                    <div class="role-chip-desc">Urgency Lexicon, Police Extortion Audio</div>
+                </div>
+                <div class="role-chip">
+                    <div class="role-chip-num">Member 3 • Analytics</div>
+                    <div class="role-chip-title">Fake Slips & KHQR</div>
+                    <div class="role-chip-desc">Visual Forensics, EMVCo Hash Checksums</div>
+                </div>
+                <div class="role-chip">
+                    <div class="role-chip-num">Member 4 • Software</div>
+                    <div class="role-chip-title">Task Scams & Law</div>
+                    <div class="role-chip-desc">Money Mules, 2026 MPTC Law, Radar DB</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">⌨️ ប្រើប្រាស់ Arrow Keys (← / →) ដើម្បីផ្លាស់ប្តូរស្លាយ</div>
+            <div class="controls-row">
+                <button class="nav-btn theme-toggle-btn" onclick="toggleTheme()">🌓 Theme</button>
+                <button class="nav-btn" onclick="nextSlide()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: MEMBER 1 -->
+    <div class="slide" id="slide-2">
+        <div class="slide-header">
+            <div class="brand-badge">👤 MEMBER 1 • AI LEAD & PRODUCT ARCHITECT</div>
+            <div class="slide-counter">SLIDE 02 / 06</div>
+        </div>
+        <div class="content-split">
+            <div class="panel-left">
+                <div>
+                    <h2 class="slide-title">Domain A: Banking Phishing & Cloned Infrastructure</h2>
+                    <div class="slide-subtitle">ការក្លែងបន្លំធនាគារ (ABA, Wing, ACLEDA) & ការបង្កើត Bot Gateway</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-icon">🎯</span>
+                            <div><strong>គោលដៅស្នូល៖</strong> ស្រាវជ្រាវ Disposable TLDs (<code>.top</code>, <code>.cc</code>, <code>.vip</code>) និងការប្រើប្រាស់ Cyrillic Homoglyphs (ឧ. <code>аba.com</code>)។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">⚡</span>
+                            <div><strong>Sub-250ms Heuristics៖</strong> បង្កើត Regex និង Whitelist សម្រាប់ឆែកមើល Domain ដោយមិនបាច់ហៅ AI (ចំណាយពេលត្រឹម 50ms)។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">📂</span>
+                            <div><strong>ប្រភពឯកសារដាក់ចូល NotebookLM៖</strong> ABA Security Advisories, CamCERT Phishing Alerts, KROH Startup Pack។</div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-action btn-secondary" onclick="openModal('m1')">🔍 មើលព័ត៌មានលម្អិត & ករណីសិក្សា</button>
+            </div>
+            <div class="panel-right">
+                <div class="prompt-preview-card">
+                    <div class="prompt-header">
+                        <span class="prompt-label">NotebookLM Master Prompt (Member 1)</span>
+                        <span style="font-size: 0.75rem; color: var(--primary);">Ready to Copy</span>
+                    </div>
+                    <div class="prompt-text" id="prompt-m1">You are a Principal Cyber Threat Intelligence Analyst specializing in Southeast Asian financial phishing and domain infrastructure.
+
+Analyze all uploaded sources regarding Cambodian banking phishing campaigns (specifically targeting ABA Bank, Wing, ACLEDA, and Bakong) and generate a rigorous technical intelligence brief answering:
+
+1. INFRASTRUCTURE & DISCOVERY:
+   - What top-level domains (TLDs, e.g., .top, .cc, .vip), DNS providers, and SSL cert issuers do Cambodian banking scammers predominantly use?
+   - How do scammers execute homoglyph and typo-squatting attacks (e.g., Cyrillic characters mimicking Latin letters)?
+   - What URL redirection and obfuscation patterns (e.g., bit.ly, t.me, multi-hop redirects) are observed?
+
+2. ATTACK SEQUENCE & CREDENTIAL HARVESTING:
+   - Step-by-step breakdown: from initial Telegram DM / SMS to fake webview.
+   - What credentials do they capture (4-digit app PIN, phone number, forwarded OTP)?
+
+3. DEFENSIVE DETECTION LOGIC FOR KROH:
+   - What deterministic rules can execute in &lt;50ms without calling an LLM?
+   - What tasks should be passed to Gemini 3.1 Lite?
+
+Format: TL;DR, IoC Table, False-Positive Edge Cases, and Actionable Bot Recommendations.</div>
+                </div>
+                <button class="btn-action" id="btn-copy-m1" onclick="copyPrompt('prompt-m1', 'btn-copy-m1')">📋 Copy Prompt សម្រាប់ NotebookLM</button>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">ប្រគល់ជូន៖ <strong>Christpor Rin (AI Lead)</strong></div>
+            <div class="controls-row">
+                <button class="nav-btn" onclick="prevSlide()">←</button>
+                <button class="nav-btn" onclick="nextSlide()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: MEMBER 2 -->
+    <div class="slide" id="slide-3">
+        <div class="slide-header">
+            <div class="brand-badge">👤 MEMBER 2 • DATA SCIENCE & NLP SPECIALIST</div>
+            <div class="slide-counter">SLIDE 03 / 06</div>
+        </div>
+        <div class="content-split">
+            <div class="panel-left">
+                <div>
+                    <h2 class="slide-title">Domain B: Vernacular Khmer NLP & Voice Extortion</h2>
+                    <div class="slide-subtitle">ការវិភាគភាសាខ្មែរបោកប្រាស់ និងសារសំឡេងគំរាមកំហែង (Voice Notes)</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-icon">🗣️</span>
+                            <div><strong>ទម្រង់បោកប្រាស់ ៣ ធំៗ៖</strong> ការក្លែងជាប៉ូលិស (កញ្ចប់អីវ៉ាន់ជាប់គយ/គ្រឿងញៀន), បុគ្គលិកធនាគារ (គណនីត្រូវបង្កក), គ្រោះថ្នាក់សាច់ញាតិបន្ទាន់។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">📝</span>
+                            <div><strong>Khmer Red-Flag Lexicon៖</strong> ស្រង់ពាក្យគន្លឹះចំនួន 20 (ឧ. <em>"ផ្ទេរប្រាក់ជាបន្ទាន់", "គណនីត្រូវបិទ", "កុំប្រាប់អ្នកណា"</em>)។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">📂</span>
+                            <div><strong>ប្រភពឯកសារដាក់ចូល NotebookLM៖</strong> កំណត់ហេតុស្នងការនគរបាលជាតិ, អត្ថបទសារព័ត៌មានក្នុងស្រុក, Telegram transcripts។</div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-action btn-secondary" onclick="openModal('m2')">🔍 មើលព័ត៌មានលម្អិត & ករណីសិក្សា</button>
+            </div>
+            <div class="panel-right">
+                <div class="prompt-preview-card">
+                    <div class="prompt-header">
+                        <span class="prompt-label">NotebookLM Master Prompt (Member 2)</span>
+                        <span style="font-size: 0.75rem; color: var(--primary);">Ready to Copy</span>
+                    </div>
+                    <div class="prompt-text" id="prompt-m2">You are a Senior Computational Linguist and Behavioral Fraud Specialist specializing in Khmer vernacular discourse and social engineering.
+
+Analyze all uploaded sources on Cambodian phone scams, Telegram voice messages, and text-based fraud to construct a definitive linguistic threat dictionary:
+
+1. PSYCHOLOGICAL MANIPULATION ARCHETYPES:
+   - Deconstruct the 3 most prevalent voice/chat scam scripts in Cambodia:
+     a) Police / Court Summons Extortion (e.g., seized contraband package)
+     b) Commercial Bank Fraud Alert (e.g., money laundering freeze, move to safe account)
+     c) Hospital / Urgent Relative Emergency
+   - What emotional levers are weaponized (fear of authority, immediate panic)?
+
+2. KHMER LINGUISTIC MARKERS & VOCABULARY:
+   - List the 20 most frequent Khmer trigger words and phrases indicating high scam probability (provide Khmer script, Romanized phonetic, and English meaning).
+   - What speech traits distinguish scripted fraud calls from real official calls?
+
+3. GROUND-TRUTH TEST BENCHMARK FOR KROH:
+   - Provide 5 realistic Khmer scam voice message transcripts (annotated threat score 0-100%).
+   - Provide 3 authentic bank/courier customer service transcripts (negative control samples).
+
+Format: Linguistic Taxonomy Matrix, Khmer Red-Flag Lexicon, and Gemini Triage Prompts.</div>
+                </div>
+                <button class="btn-action" id="btn-copy-m2" onclick="copyPrompt('prompt-m2', 'btn-copy-m2')">📋 Copy Prompt សម្រាប់ NotebookLM</button>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">ប្រគល់ជូន៖ <strong>Data Science & NLP Lead</strong></div>
+            <div class="controls-row">
+                <button class="nav-btn" onclick="prevSlide()">←</button>
+                <button class="nav-btn" onclick="nextSlide()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: MEMBER 3 -->
+    <div class="slide" id="slide-4">
+        <div class="slide-header">
+            <div class="brand-badge">👤 MEMBER 3 • ANALYTICS & FORENSICS SPECIALIST</div>
+            <div class="slide-counter">SLIDE 04 / 06</div>
+        </div>
+        <div class="content-split">
+            <div class="panel-left">
+                <div>
+                    <h2 class="slide-title">Domain C: Fake Bank Receipts & KHQR Forensics</h2>
+                    <div class="slide-subtitle">ការស្រាវជ្រាវវិក្កយបត្រផ្ទេរប្រាក់ក្លែងបន្លំ (Fake Slips) & កូដ QR ក្លែងក្លាយ</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-icon">🧾</span>
+                            <div><strong>ចំនុចខ្វះចន្លោះលើ Fake Slip៖</strong> Font អក្សរខុសពីស្តង់ដារធនាគារ (ប្រើ Arial ជំនួស Custom Font), បន្ទាត់អក្សរមិនស្មើ, ម៉ោងផ្ទេរលុយមុនម៉ោងកុម្ម៉ង់។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">🔍</span>
+                            <div><strong>EMVCo & Checksum Validation៖</strong> របៀបផ្ទៀងផ្ទាត់ Hash របស់ Bakong និងលេខ Reference ដើម្បីការពារអាជីវករ និងហាងកាហ្វេ។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">📂</span>
+                            <div><strong>ប្រភពឯកសារដាក់ចូល NotebookLM៖</strong> Bakong KHQR EMVCo Specifications, ABA Slip Guidelines, ករណីបន្លំវិក្កយបត្រតាមតេឡេក្រាម។</div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-action btn-secondary" onclick="openModal('m3')">🔍 មើលព័ត៌មានលម្អិត & ករណីសិក្សា</button>
+            </div>
+            <div class="panel-right">
+                <div class="prompt-preview-card">
+                    <div class="prompt-header">
+                        <span class="prompt-label">NotebookLM Master Prompt (Member 3)</span>
+                        <span style="font-size: 0.75rem; color: var(--primary);">Ready to Copy</span>
+                    </div>
+                    <div class="prompt-text" id="prompt-m3">You are a Digital Forensics Investigator and Computer Vision Specialist specializing in mobile transaction receipts and EMVCo QR code fraud.
+
+Examine all uploaded materials regarding payment slip tampering and fake QR codes in Cambodia:
+
+1. SLIP FABRICATION MECHANISMS:
+   - How are fake ABA and Bakong payment receipts generated (Telegram generator bots, web apps, modified PSD templates)?
+   - What are the most common visual artifacts of tampered slips:
+     * Font inconsistencies (system default fonts vs. official custom bank typefaces)
+     * Misaligned text baselines and bounding box distortions
+     * Date/time stamp discrepancies
+     * "Pending" or "Submitted" status graphically disguised as "Success"
+
+2. TRANSACTION ID & CHECKSUM VALIDATION:
+   - How do authentic Bakong transaction hashes and ABA reference numbers format their sequences?
+   - What mathematical checks can determine if an EMVCo KHQR code payload has been altered?
+
+3. MSME DEFENSE BLUEPRINT FOR KROH:
+   - Outline an automated 3-step verification pipeline when a shopkeeper forwards a receipt screenshot to KROH.
+
+Format: Visual Forensic Anomaly Checklist (10 points), Structural Comparison, and Heuristic Fraud Rules.</div>
+                </div>
+                <button class="btn-action" id="btn-copy-m3" onclick="copyPrompt('prompt-m3', 'btn-copy-m3')">📋 Copy Prompt សម្រាប់ NotebookLM</button>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">ប្រគល់ជូន៖ <strong>Analytics & Fraud Forensics Lead</strong></div>
+            <div class="controls-row">
+                <button class="nav-btn" onclick="prevSlide()">←</button>
+                <button class="nav-btn" onclick="nextSlide()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: MEMBER 4 -->
+    <div class="slide" id="slide-5">
+        <div class="slide-header">
+            <div class="brand-badge">👤 MEMBER 4 • SOFTWARE & THREAT INTEL LEAD</div>
+            <div class="slide-counter">SLIDE 05 / 06</div>
+        </div>
+        <div class="content-split">
+            <div class="panel-left">
+                <div>
+                    <h2 class="slide-title">Domain D: Telegram Task Scams & 2026 MPTC Law</h2>
+                    <div class="slide-subtitle">អន្ទាក់ការងារ Like វីដេអូ, គណនីជួល (Mule Accounts) & ច្បាប់ប្រឆាំងបទល្មើសបច្ចេកវិទ្យា</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-icon">🎣</span>
+                            <div><strong>ដំណាក់កាលអន្ទាក់ទាំង ៤៖</strong> នុយ (ឲ្យ $2-$5) ➔ ទាក់ទាញចូល VIP (តម្រូវដាក់ប្រាក់ $50) ➔ បង្កកលុយទារប្រាក់បន្ថែម ➔ ទិញកុងធនាគារ ($50-$100) លាងលុយ។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">⚖️</span>
+                            <div><strong>ច្បាប់ថ្មីខែមេសា ឆ្នាំ២០២៦៖</strong> ទោសអស់មួយជីវិតសម្រាប់មេក្លោងបោកប្រាស់ និងទោសព្រហ្មទណ្ឌលើម្ចាស់ទីតាំង/ម្ចាស់កុងធនាគារជួល។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">🗄️</span>
+                            <div><strong>ស្ថាបត្យកម្មទិន្នន័យ៖</strong> Supabase Telemetry Schema & Public Web Threat Radar ដើម្បីបង្ហាញចំណុចក្តៅទូទាំងប្រទេស។</div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-action btn-secondary" onclick="openModal('m4')">🔍 មើលព័ត៌មានលម្អិត & ករណីសិក្សា</button>
+            </div>
+            <div class="panel-right">
+                <div class="prompt-preview-card">
+                    <div class="prompt-header">
+                        <span class="prompt-label">NotebookLM Master Prompt (Member 4)</span>
+                        <span style="font-size: 0.75rem; color: var(--primary);">Ready to Copy</span>
+                    </div>
+                    <div class="prompt-text" id="prompt-m4">You are a Principal Software Architect and Cybercrime Intelligence Strategist specializing in transnational fraud networks and national threat telemetry.
+
+Analyze all uploaded documents regarding Cambodian online task scams, money mule operations, and the 2026 legal/regulatory landscape:
+
+1. TASK SCAM LIFECYCLE & MONEY MULE PIPELINES:
+   - Detail the 4 stages of Telegram job/task scams ("Like videos for $5" -> small payout -> VIP deposit lock -> total loss).
+   - How do criminal syndicates recruit Cambodian youth as "money mules" (buying bank accounts for $50-$100)?
+   - What are the legal liabilities for bank account owners under the April 2026 Anti-Cybercrime Law?
+
+2. NATIONAL REGULATORY & INCIDENT INTEGRATION:
+   - How do the Ministry of Post and Telecommunications (MPTC), TRC (Hotline 6789), and CamCERT process citizen reports?
+   - How can KROH position itself as the automated intake layer feeding high-confidence IoCs to law enforcement and banks?
+
+3. TELEMETRY SCHEMA & RADAR DATA ARCHITECTURE:
+   - Define telemetry attributes needed to log a scam incident without collecting personal user data (Zero-PII).
+   - Propose the data aggregation model for the public Web Threat Radar.
+
+Format: Task Scam Escalation Flowchart, Legal Risk Summary, and Supabase Telemetry Schema.</div>
+                </div>
+                <button class="btn-action" id="btn-copy-m4" onclick="copyPrompt('prompt-m4', 'btn-copy-m4')">📋 Copy Prompt សម្រាប់ NotebookLM</button>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">ប្រគល់ជូន៖ <strong>Software Engineer & Threat Intel Lead</strong></div>
+            <div class="controls-row">
+                <button class="nav-btn" onclick="prevSlide()">←</button>
+                <button class="nav-btn" onclick="nextSlide()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: SYNTHESIS -->
+    <div class="slide" id="slide-6">
+        <div class="slide-header">
+            <div class="brand-badge">🚀 TEAM CHBAS SYNTHESIS & WINNING FORMULA</div>
+            <div class="slide-counter">SLIDE 06 / 06</div>
+        </div>
+        <div class="content-split">
+            <div class="panel-left">
+                <div>
+                    <h2 class="slide-title">Roadmap ឆ្ពោះទៅកាន់ជ័យជំនះ AUPP Hackathon</h2>
+                    <div class="slide-subtitle">ការរួមបញ្ចូលទិន្នន័យពី NotebookLM ទាំង ៤ មកកាន់ KROH Engine</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-icon">📅</span>
+                            <div><strong>ថ្ងៃសុក្រ (Friday Sprint)៖</strong> សមាជិកទាំង ៤ បញ្ចូល Prompt ទៅក្នុង NotebookLM រៀងៗខ្លួន និងទាញយករបាយការណ៍ 2 ទំព័រ។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">🧪</span>
+                            <div><strong>ថ្ងៃសៅរ៍ (Dataset Gate)៖</strong> រៀបចំសំណុំទិន្នន័យ 20 ករណីពិត (5 Phishing + 5 Voice + 5 Slips + 5 Task Scams) ក្នុង <code>docs/dataset/</code>។</div>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-icon">🏆</span>
+                            <div><strong>Hackathon Presentation Pitch៖</strong> បង្ហាញភាពស៊ីសង្វាក់ជាមួយយុទ្ធនាការ MPTC 6789, CCOS, និងការការពារប្រជាពលរដ្ឋ 17 លាននាក់ក្នុងល្បឿន 200ms!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">
+                    📚 <strong>Verified Sources:</strong> MPTC (mptc.gov.kh), CamCERT, NBC Bakong, TRC Hotline 6789, CCOS 2026.
+                </div>
+            </div>
+            <div class="panel-right" style="justify-content: center; align-items: center; text-align: center;">
+                <div style="font-size: 3.5rem; margin-bottom: 10px;">🛡️</div>
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 8px;">KROH: ក្រោះការពារជាតិ</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 320px; margin-bottom: 20px;">
+                    "ការពារប្រជាជនកម្ពុជាពីការបោកប្រាស់តាម Telegram ក្នុងរយៈពេលត្រឹមតែ 200ms"
+                </p>
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <button class="btn-action" style="flex: 1;" onclick="goToSlide(1)">🔄 ចាប់ផ្តើមឡើងវិញ</button>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="shortcut-hint">✨ រៀបចំរួចជាស្រេចដោយ <strong>Christpor Rin & Antigravity AI</strong></div>
+            <div class="controls-row">
+                <button class="nav-btn" onclick="prevSlide()">←</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event)">✕</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+
+    function showSlide(index) {
+        document.querySelectorAll('.slide').forEach(el => el.classList.remove('active'));
+        const target = document.getElementById(`slide-${index}`);
+        if (target) {
+            target.classList.add('active');
+            currentSlide = index;
+        }
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    function goToSlide(index) {
+        showSlide(index);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+    }
+
+    function copyPrompt(textElementId, btnElementId) {
+        const text = document.getElementById(textElementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById(btnElementId);
+            const originalText = btn.innerText;
+            btn.innerText = "✓ បានចម្លង (Copied!)";
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('copied');
+            }, 2500);
+        }).catch(err => {
+            alert("Clipboard copy failed, please select text manually.");
+        });
+    }
+
+    const modalData = {
+        m1: {
+            title: "Domain A: Banking Phishing Infrastructure (Member 1)",
+            content: `
+                <h3 style="color: var(--primary); margin-bottom: 12px;">ហេតុអ្វីបានជាករណីនេះសំខាន់បំផុត?</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">
+                    ៨៥% នៃការខាតបង់ប្រាក់របស់ប្រជាពលរដ្ឋកើតចេញពី Link ក្លែងបន្លំធនាគារ (Phishing) តាម Telegram ឬ SMS ដែលតម្រូវឲ្យជនរងគ្រោះបញ្ចូល 4-Digit PIN និង OTP។
+                </p>
+                <div style="background: var(--code-bg); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 16px;">
+                    <strong style="color: var(--accent);">បច្ចេកទេស Homoglyphs (តួអក្សរបន្លំ):</strong><br>
+                    <code style="color: #60A5FA;">https://аba-rewards.top (អក្សរ 'а' គឺ Cyrillic U+0430 មិនមែន Latin 'a' ឡើយ!)</code>
+                </div>
+                <h4 style="margin-bottom: 8px;">ភារកិច្ចរបស់ Christpor:</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    បង្កើត Regex Pre-check ដើម្បីកាត់បន្ថយពេលវេលាត្រួតពិនិត្យមកក្រោម 50ms មុនពេលបញ្ជូនទៅ Gemini 3.1 Lite។
+                </p>
+            `
+        },
+        m2: {
+            title: "Domain B: Khmer NLP & Voice Extortion (Member 2)",
+            content: `
+                <h3 style="color: var(--primary); margin-bottom: 12px;">ការវាយប្រហារតាមចិត្តសាស្ត្រ និងសំឡេង (Voice Notes)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">
+                    ជនរងគ្រោះវ័យកណ្តាល និងចាស់ជរាតែងតែចាញ់បោកការផ្ញើសារជាសំឡេង (Voice Notes) ព្រោះវាបង្កើតអារម្មណ៍ភ័យខ្លាច (Fear of Authority) និងការបង្ខំឲ្យផ្ទេរប្រាក់ជាបន្ទាន់។
+                </p>
+                <div style="background: var(--code-bg); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 16px;">
+                    <strong style="color: var(--danger);">ពាក្យគន្លឹះគ្រោះថ្នាក់ (Red-Flag Triggers):</strong><br>
+                    • <em>"កញ្ចប់អីវ៉ាន់របស់អ្នកជាប់គយ មានសារធាតុញៀន"</em><br>
+                    • <em>"គណនីរបស់អ្នកពាក់ព័ន្ធនឹងការលាងលុយកខ្វក់ ត្រូវផ្ទេរមកគណនីសុវត្ថិភាពដើម្បីផ្ទៀងផ្ទាត់"</em><br>
+                    • <em>"កុំទាន់ប្រាប់អ្នកណា ប្រយ័ត្នខុសច្បាប់"</em>
+                </div>
+                <h4 style="margin-bottom: 8px;">ភារកិច្ចរបស់ Member 2:</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    ចងក្រងពាក្យគន្លឹះចំនួន 20 និង transcript សំឡេងបោកប្រាស់ 5 ករណី ដើម្បីធ្វើជា benchmark សម្រាប់ AI NLP។
+                </p>
+            `
+        },
+        m3: {
+            title: "Domain C: Fake Slips & KHQR Forensics (Member 3)",
+            content: `
+                <h3 style="color: var(--primary); margin-bottom: 12px;">ការក្លែងបន្លំវិក្កយបត្រធនាគារ (MSME Defense)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">
+                    អាជីវករខ្នាតតូច ហាងកាហ្វេ និងអ្នកដឹកជញ្ជូនរងគ្រោះរាប់ពាន់ដុល្លារដោយសារ Fake Slip Generator Bots លើ Telegram ដែលកែប្រែទិន្នន័យផ្ទេរប្រាក់ក្នុងរយៈពេល 10 វិនាទី។
+                </p>
+                <div style="background: var(--code-bg); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 16px;">
+                    <strong style="color: var(--secondary);">ចំនុចសង្កេតកោសល្យវិច័យ (Forensic Artifacts):</strong><br>
+                    1. Font អក្សរមិនត្រូវតាម Bank Guidelines (ប្រើ Standard Font ជំនួស Custom Font)<br>
+                    2. កាលបរិច្ឆេទ និងលេខ Hash មិនមាន Checksum ត្រឹមត្រូវតាមស្តង់ដារ Bakong EMVCo<br>
+                    3. អក្សរ "Pending" ត្រូវបានកាត់តបិទបាំងដាក់ "Success"
+                </div>
+                <h4 style="margin-bottom: 8px;">ភារកិច្ចរបស់ Member 3:</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    កំណត់ Visual Anomaly Checklist ចំនួន 10 ចំនុច ដើម្បីឲ្យ Gemini Vision ឆែកមើលរូបថតវិក្កយបត្របានត្រឹមត្រូវ 100%។
+                </p>
+            `
+        },
+        m4: {
+            title: "Domain D: Task Scams, Mules & 2026 Law (Member 4)",
+            content: `
+                <h3 style="color: var(--primary); margin-bottom: 12px;">អន្ទាក់ការងារ Telegram & បទល្មើសគណនីជួល</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">
+                    យុវជន និងសិស្សនិស្សិតរាប់ពាន់នាក់កំពុងក្លាយជាជនរងគ្រោះ ព្រមទាំងប្រឈមមុខនឹងផ្លូវច្បាប់ ដោយសារការជួល ឬលក់គណនីធនាគារ (Mule Accounts) ទៅឲ្យក្រុមឧក្រិដ្ឋជន។
+                </p>
+                <div style="background: var(--code-bg); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 16px;">
+                    <strong style="color: var(--primary);">ទិដ្ឋភាពច្បាប់ខែមេសា ឆ្នាំ២០២៦ (Anti-Cybercrime Law):</strong><br>
+                    • ទោសអស់មួយជីវិតសម្រាប់មេក្លោងបង្កើតអន្ទាក់បច្ចេកវិទ្យា<br>
+                    • ការទទួលខុសត្រូវព្រហ្មទណ្ឌលើម្ចាស់កុងធនាគារដែលអនុញ្ញាតឲ្យក្រុមបោកប្រាស់ប្រើប្រាស់<br>
+                    • កិច្ចសហការរវាង MPTC (Hotline 6789) និង CamCERT
+                </div>
+                <h4 style="margin-bottom: 8px;">ភារកិច្ចរបស់ Member 4:</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    បង្កើត Supabase Telemetry Schema និង Threat Radar Data Model ដើម្បីបង្ហាញផែនទី Scam ផ្ទាល់នៅលើគេហទំព័រ។
+                </p>
+            `
+        }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('modalOverlay');
+        const content = document.getElementById('modalContent');
+        if (modalData[id]) {
+            content.innerHTML = `
+                <h2 style="color: var(--text-primary); margin-bottom: 16px;">${modalData[id].title}</h2>
+                ${modalData[id].content}
+            `;
+            modal.classList.add('active');
+        }
+    }
+
+    function closeModal(e) {
+        if (!e || e.target.id === 'modalOverlay' || e.target.classList.contains('modal-close')) {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+    }
+</script>
+
+</body>
+</html>

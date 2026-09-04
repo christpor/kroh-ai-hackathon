@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/slides", "destination": "/slides.html" },
+    { "source": "/research", "destination": "/slides.html" },
+    { "source": "/landing", "destination": "/landing.html" },
+    { "source": "/((?!slides|research|landing|assets).*)", "destination": "/index.html" }
   ]
 }
