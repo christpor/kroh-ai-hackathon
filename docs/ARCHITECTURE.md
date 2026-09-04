@@ -133,11 +133,18 @@ gcloud run deploy kroh-backend \
 To prevent connection exhaustion when multiple serverless Cloud Run instances burst, all database traffic routes through Supabase's transaction pooler on **port 6543**. Over 10,000 serverless invocations safely multiplex across a clean pool of persistent PostgreSQL connections.
 
 ### 4.5 The 8-Tier Production Tech Stack
-1. **Frontend:** Next.js 15 (App Router), React 18, Tailwind CSS, Lucide Icons.
-2. **Typography:** Kantumruy Pro (Khmer 600 weight, `leading-[1.45]`), Inter.
-3. **Identity & Auth:** Firebase Auth (Google Sign-In), Firebase Admin SDK, strict email whitelist.
-4. **Bot Gateway:** Node.js 22 LTS, Fastify (70k+ req/sec), Telegraf.
-5. **Compute & Edge:** Google Cloud Run (`asia-southeast1`), Vercel Edge (`sin1`).
-6. **In-Memory Cache:** Node-Cache / Quick-LRU (30s config TTL), Node.js native `crypto`.
-7. **Database:** Supabase PostgreSQL 15+, PgBouncer Transaction Pooler, Row-Level Security.
-8. **Vernacular AI:** Google Gemini 3.1 Lite & 2.5 Flash (`@google/genai`).
+
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,nodejs,fastify,gcp,firebase,supabase,postgres&perline=10" alt="KROH Tech Stack" />
+</p>
+
+| Tier | Category | Technology & Package | Architectural Purpose |
+| :--- | :--- | :--- | :--- |
+| **🌐 Tier 1** | **Web Frontend & UI** | `Next.js 15` (App Router) • `React 18` • `Tailwind CSS` • `Lucide Icons` | High-contrast Apple-grade dark/light HUD on Vercel Singapore (`sin1`). |
+| **✍️ Tier 2** | **Khmer Typography** | `Kantumruy Pro` (Font-Weight 600) • `Inter` | Native Khmer font rendering without vowel mark clipping (`leading-[1.45]`). |
+| **🔒 Tier 3** | **Identity & Auth** | `Firebase Auth` • `firebase-admin` • `Domain Whitelist` | Zero-trust Google Sign-In with strict email filtering (`ADMIN_ALLOWED_EMAILS`). |
+| **🤖 Tier 4** | **Bot Gateway** | `Node.js 22 LTS` • `Fastify` (70k req/s) • `Telegraf` | Low-latency Telegram webhook receiver with sub-15ms Fast-ACK handling. |
+| **☁️ Tier 5** | **Edge & Compute** | `Google Cloud Run` (`asia-southeast1`) • `Vercel Edge` | Serverless auto-scaling (0 to 100 instances) with zero idle cost. |
+| **⚡ Tier 6** | **In-Memory Cache** | `Quick-LRU` (30s TTL) • Native Node.js `crypto` | Drops 85% normal chat in RAM; streams SHA256 hashes of `.apk` files without disk writes. |
+| **🗄️ Tier 7** | **Database & Pooling** | `Supabase PostgreSQL 15+` • `PgBouncer` (Port 6543) | Zero-PII threat logging, RLS policies, and connection pooling under heavy spikes. |
+| **🧠 Tier 8** | **Vernacular AI** | `Google Gemini 3.1 Lite` • `Gemini 2.5 Flash` (`@google/genai`) | 180ms multimodal vision for altered bank slips; native colloquial Khmer voice triage. |

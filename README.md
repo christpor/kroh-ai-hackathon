@@ -24,6 +24,10 @@ Every single day across Cambodia, thousands of everyday citizens, small shopkeep
 
 **KROH (ក្រោះ)** is an autonomous, multimodal Telegram shield (`@KrohShieldBot`) and live national threat radar that meets 17 million Cambodians directly where they communicate every day. Citizens simply forward any suspicious message, link, voice note, altered bank receipt, or file to the bot—delivering an authoritative, polite **vernacular Khmer audio verdict in under 300 milliseconds**.
 
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,nodejs,fastify,gcp,firebase,supabase,postgres&perline=10" alt="KROH Enterprise Tech Stack" />
+</p>
+
 ---
 
 ## 🗺️ 2. The Master Visual Cognitive Flow Diagram
@@ -83,10 +87,11 @@ Scammers constantly invent new stories (fake Facebook Live lottery, urgent hospi
 
 | Layer | Technology | Function | Cost & Latency |
 | :--- | :--- | :--- | :--- |
-| **Stage 1: Deterministic Engine** | Node.js, RDAP DNS, EMVCo CRC16, Crypto SHA256 | Filters out 98.5% of harmless chat; verifies domain age and QR checksums | **Sub-50ms / $0.0000** |
-| **Stage 2: Vernacular AI Brain** | **Gemini 3.1 Lite / 2.5 Flash** (`@google/genai`) | Multimodal vision for fake slips; native Khmer audio transcription | **180ms / $0.0001** |
-| **Stage 3: Telemetry & Radar** | **Supabase PostgreSQL 15+** | 0-PII anonymous threat feed logging; real-time broadcast to banks | **Sub-100ms / $0.00** |
-| **Stage 4: Mission Control** | **Next.js 15, Firebase Auth, RBAC** | Live prompt tuning, false-positive overrides, and zero-day blacklist | **Sub-50ms / Realtime** |
+| **⚡ Stage 1: Deterministic Engine** | `Node.js 22` • `Fastify` • `EMVCo CRC16` • `Crypto SHA256` | Drops 98.5% harmless traffic in RAM; verifies domain age & QR checksums | **Sub-50ms / $0.0000** |
+| **🧠 Stage 2: Vernacular AI Brain** | `Google Gemini 3.1 Lite` • `Gemini 2.5 Flash` | Multimodal vision for fake slips; native Khmer audio transcription | **180ms / $0.0001** |
+| **🗄️ Stage 3: Telemetry & Radar** | `Supabase PostgreSQL 15+` • `PgBouncer` (Port 6543) | 0-PII anonymous threat feed logging; real-time broadcast to banks | **Sub-100ms / $0.00** |
+| **💻 Stage 4: Mission Control** | `Next.js 15` • `Firebase Auth (Google)` • `Tailwind CSS` | Live prompt tuning, false-positive overrides, and zero-day blacklist | **Sub-50ms / Realtime** |
+| **☁️ Stage 5: Sovereign Hosting** | `Google Cloud Run (Singapore)` • `Vercel Edge (sin1)` | Fast-ACK webhook gateway; autoscaling 0 ➔ 100+ instances | **Zero Idle Cost ($0.00)** |
 
 ---
 
