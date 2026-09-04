@@ -1,28 +1,30 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/christpor/khqr-shield-pitch/main/public/hero-scanner.jpg" alt="KROH Shield Banner" width="100%" style="border-radius: 16px;" />
-</p>
-
-<h1 align="center">🛡️ KROH (ក្រោះ) — The Digital Armor</h1>
-<h3 align="center">Autonomous Multimodal Anti-Scam Shield for Cambodian Citizens</h3>
-
-<p align="center">
-  <em>Engineered by <strong>Team CHBAS (ច្បាស់ ច្បាស់)</strong> for the <strong>AUPP - ITM Innovation Hackathon 2026</strong></em><br>
-  <strong>American University of Phnom Penh (AUPP)</strong> • Phnom Penh, Cambodia
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/header/gradient.svg?title=KROH+(ក្រោះ)&subtitle=Autonomous+Multimodal+Anti-Scam+Shield+for+Cambodia&logo=telegram&theme=emerald&mode=dark" />
+    <img alt="KROH Banner" src="https://shieldcn.dev/header/gradient.svg?title=KROH+(ក្រោះ)&subtitle=Autonomous+Multimodal+Anti-Scam+Shield+for+Cambodia&logo=telegram&theme=emerald&mode=light" />
+  </picture>
 </p>
 
 <p align="center">
-  <a href="https://my-idea-for-hackathon.vercel.app/slides"><img src="https://img.shields.io/badge/Live_Deck-my--idea--for--hackathon.vercel.app-059669?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Presentation"></a>
-  <img src="https://img.shields.io/badge/Triage_Latency-<300ms-blue?style=for-the-badge&logo=lightning" alt="Response Time">
-  <img src="https://img.shields.io/badge/AI_Brain-Gemini_3.1_Lite-orange?style=for-the-badge&logo=google" alt="AI Brain">
-  <img src="https://img.shields.io/badge/Security-Private_Staging-red?style=for-the-badge" alt="Security Staging">
+  <strong>Autonomous Multimodal Anti-Scam Shield & Real-Time National Threat Radar for 17M Cambodian Citizens.</strong><br>
+  <em>Engineered by <strong>Team CHBAS (ច្បាស់ ច្បាស់)</strong> for the <strong>AUPP - ITM Innovation Hackathon 2026</strong> • Phnom Penh, Cambodia</em>
+</p>
+
+<p align="center">
+  <a href="https://my-idea-for-hackathon.vercel.app/slides"><img src="https://shieldcn.dev/badge/Live_Deck-my--idea--for--hackathon.vercel.app-emerald?variant=secondary" alt="Live Presentation" /></a>
+  <img src="https://shieldcn.dev/badge/Triage_Latency-<300ms-blue?variant=secondary" alt="Response Time" />
+  <img src="https://shieldcn.dev/badge/AI_Brain-Gemini_3.1_Lite-amber?variant=secondary" alt="AI Brain" />
+  <img src="https://shieldcn.dev/badge/Architecture-Deterministic_+_AI-cyan?variant=secondary" alt="Architecture" />
+  <img src="https://shieldcn.dev/badge/Status-Hackathon_MVP-zinc?variant=secondary" alt="Status" />
 </p>
 
 ---
 
 ## ⚡ 1. The 30-Second Executive Summary
-Every single day across Cambodia, thousands of everyday citizens, small shopkeepers, and elderly parents lose millions of dollars to phishing links (`aba-bonus.top`), fake loan bots, cloned APKs, and manipulated Telegram voice notes. Victims lack technical literacy, while banks and police only issue public warnings weeks after the money is already stolen.
 
-**KROH (ក្រោះ)** is an autonomous, multimodal Telegram shield (`@KrohShieldBot`) and live national threat radar that meets 17 million Cambodians directly where they communicate every day. Citizens simply forward any suspicious message, link, voice note, altered bank receipt, or file to the bot—delivering an authoritative, polite **vernacular Khmer audio verdict in under 300 milliseconds**.
+Every day across Cambodia, thousands of everyday citizens, small shopkeepers, and elderly parents lose millions to phishing links (`aba-bonus.top`), fake loan bots, cloned APKs, and manipulated Telegram voice notes. Victims lack technical literacy, while banks and police only issue public warnings weeks after money is stolen.
+
+**KROH (ក្រោះ)** is an autonomous, multimodal Telegram shield (`@KrohShieldBot`) and live national threat radar meeting 17 million Cambodians directly where they communicate. Citizens simply forward any suspicious message, link, voice note, altered bank receipt, or file to the bot—receiving an authoritative, polite **vernacular Khmer audio verdict in under 300 milliseconds**.
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,nodejs,fastify,gcp,firebase,supabase,postgres&perline=10" alt="KROH Enterprise Tech Stack" />
@@ -31,7 +33,6 @@ Every single day across Cambodia, thousands of everyday citizens, small shopkeep
 ---
 
 ## 🗺️ 2. The Master Visual Cognitive Flow Diagram
-*Designed for both technical engineers and non-technical hackathon judges to understand the entire solution in 60 seconds:*
 
 ```mermaid
 graph TD
@@ -41,28 +42,28 @@ graph TD
   classDef admin fill:#1e293b,stroke:#0ea5e9,stroke-width:2px,color:#fff;
   classDef auth fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff;
 
-  subgraph The Problem [⚠️ The Daily Cambodian Reality: Millions Lost to Scams]
-    Victim([👤 Citizen / Elder / Shopkeeper]):::victim -->|Receives Cloned Bank Link / Fake Loan / Voice Scam| Trap[Scammer Demands Upfront Fee, OTP, or Password]
+  subgraph The Problem [⚠️ The Daily Cambodian Reality]
+    Victim([👤 Citizen / Elder / Merchant]):::victim -->|Suspicious Link / Loan Bot / Voice Scam| Trap[Scammer Demands Upfront Fee, OTP, or APK Install]
   end
 
-  subgraph The KROH Solution [🛡️ Zero-Friction Telegram Citizen Guardian]
-    Victim -->|1-Click Forward to @KrohShieldBot| Bot[🤖 KROH Shield Bot Gateway]:::shield
-    Bot --> Gate1{⚡ Gate 1: $0 In-Memory Filter<br/>Discards 85% Normal Group Chat}
-    Gate1 --> Gate2{🔍 Gate 2: Deterministic Rules<br/>Domain Age <14d & Scam Account Cache}
-    Gate2 --> Gate3{🧠 Gate 3: Gemini 3.1 Lite AI<br/>Khmer Audio Transcription & Slip Forensics}
-    Gate3 --> VoiceAlert[🚨 3-Second Spoken Khmer Voice Verdict<br/>'កុំផ្ទេរប្រាក់ឱ្យគេឱ្យសោះ! នេះជាការបោកប្រាស់!']:::shield
+  subgraph The KROH Solution [🛡️ Zero-Friction Telegram Shield]
+    Victim -->|1-Click Forward to @KrohShieldBot| Bot[🤖 KROH Gateway]:::shield
+    Bot --> Gate1{⚡ Gate 1: $0 In-Memory Filter<br/>Drops 85% Safe Chat}
+    Gate1 --> Gate2{🔍 Gate 2: Deterministic Rules<br/>Domain Age <14d & Scam Blacklist}
+    Gate2 --> Gate3{🧠 Gate 3: Gemini 3.1 Lite<br/>Colloquial Khmer Voice & Slip OCR}
+    Gate3 --> VoiceAlert[🚨 Sub-300ms Spoken Khmer Voice Verdict<br/>'កុំផ្ទេរប្រាក់ឱ្យគេឱ្យសោះ! នេះជាការបោកប្រាស់!']:::shield
     VoiceAlert --> Victim
   end
 
   subgraph Mission Control [💻 Web Admin Mission Control /admin]
-    TeamCHBAS([👥 Team CHBAS Command]):::admin -->|Firebase Auth Google Sign-In| FireGate[🔒 Firebase Auth Gate & Whitelist]:::auth
+    TeamCHBAS([👥 Team CHBAS Command]):::admin -->|Firebase Auth Google Sign-In| FireGate[🔒 Zero-Trust Auth Gate]:::auth
     FireGate --> AdminHub[🎛️ Live Threat Moderation & Prompt Tuner]:::admin
     AdminHub -->|Hot-Reload Overrides 30s TTL| Bot
   end
 
-  subgraph National Collective Immunity [📡 Live Community Threat Radar]
+  subgraph National Immunity [📡 Live Collective Threat Radar]
     Gate2 & Gate3 --> TelemetryStream[(Supabase PostgreSQL)]
-    AdminHub -->|1-Click MPTC Alert & Blacklist Update| TelemetryStream
+    AdminHub -->|1-Click MPTC Export & Bank Takedown| TelemetryStream
     TelemetryStream --> LiveRadarMap[🌐 Live Threat Radar on Vercel<br/>Broadcasts new scam domain to banks in 15min]:::radar
   end
 ```
@@ -70,14 +71,15 @@ graph TD
 ---
 
 ## 🎯 3. The 3 Invariant Chokepoints (How KROH Stops Any Scam)
-Scammers constantly invent new stories (fake Facebook Live lottery, urgent hospital fee, cheap crypto, part-time jobs), but they **always rely on the exact same 3 transaction chokepoints**:
+
+Scammers constantly change their stories, but they **always rely on the exact same 3 transaction chokepoints**:
 
 1. **Chokepoint A — The Demand for Upfront Money (Advance-Fee Invariant):**
    * *The Formula:* `"You Won $10,000"` + `"Pay $200 Tax/Deposit First"` = **`100% ADVANCE_FEE_FRAUD`**.
-   * KROH intercepts the mathematical structure of the offer, not just keywords.
+   * KROH intercepts the mathematical structure of the offer, not just keyword matching.
 2. **Chokepoint B — The Disposable Cloned Link (Domain Age Invariant):**
    * Scammers deploy phishing on cheap `.top`, `.cc`, and `.vip` domains registered less than 14 days ago.
-   * KROH performs sub-50ms RDAP checks: any link claiming to be ABA or Wing registered `<14 days` is flagged **HIGH HAZARD** before the page even loads.
+   * KROH performs sub-50ms RDAP checks: any link claiming to be ABA or Wing registered `<14 days` is flagged **HIGH HAZARD** before the page even opens.
 3. **Chokepoint C — The Credential & OTP Snatch (Social Engineering Invariant):**
    * Any voice note or chat demanding a 6-digit OTP or banking password triggers an immediate emergency alert.
 
@@ -95,9 +97,13 @@ Scammers constantly invent new stories (fake Facebook Live lottery, urgent hospi
 
 ---
 
-## 🧠 5. Autonomous Cognitive Governance & Sovereign Security Gates
+## 📂 5. Deep Architecture & Verification Hub
 
-KROH operates under a **Zero-Amnesia Dual-Tier Context Engine** and automated pre-push security verification ensuring that any engineer or AI agent ramps up in **under 2 seconds** with zero context rot:
+<details>
+<summary><b>🧠 5.1 Autonomous Cognitive Governance & Dual-Tier Context Engine</b></summary>
+<br>
+
+KROH operates under a **Zero-Amnesia Dual-Tier Context Engine** ensuring that any engineer or AI agent ramps up in **under 2 seconds** with zero context rot:
 
 ```mermaid
 graph LR
@@ -110,21 +116,27 @@ graph LR
   Agent --> Short[context/STATE.md<br/><b>Short-Term Memory (≤50 Lines)</b><br/>Active milestone, blockers, next 3 tasks]:::short
   Long & Short -.-> Deep[docs/ Hub<br/><b>On-Demand Deep Specs</b><br/>PRD, Architecture, ERD, Dataset]:::deep
 ```
+</details>
 
-### 🛡️ The 5 Sovereign Security Gates HUD
+<details>
+<summary><b>🛡️ 5.2 The 5 Sovereign Security Gates HUD (Automated Pre-Push Verification)</b></summary>
+<br>
+
 Every commit and push must pass through the automated Sovereign Gate pipeline:
 
 | Sovereign Gate | Verification Method | Security Objective | Status |
 | :--- | :--- | :--- | :--- |
 | **[1/5] Gitleaks Scan** | `gitleaks detect` | Zero hardcoded API keys, JWT tokens, or private secrets | **PASS (0 Leaks) ✅** |
 | **[2/5] Token Heuristics** | Regex Entropy Matcher | Flags suspicious high-entropy tokens before staging | **PASS (Clean) ✅** |
-| **[3/5] Context Budget** | `wc -l` automated audit | Enforces `AGENT.md` $\le 100$ lines & `STATE.md` $\le 50$ lines | **PASS (132 Lines) ✅** |
+| **[3/5] Context Budget** | `wc -l` automated audit | Enforces `AGENT.md` $\le 100$ lines & `STATE.md` $\le 50$ lines | **PASS (Verified) ✅** |
 | **[4/5] Dependency Audit** | CVE Registry Scan | Zero unvetted or high-vulnerability packages | **PASS (Audited) ✅** |
 | **[5/5] 0-PII Salted HMAC** | Cryptographic Salt Verify | Enforces `HMAC_SHA256` for all Telegram user identifiers | **PASS (0-PII) ✅** |
 
----
+</details>
 
-## 📊 6. Verified Ground-Truth Scam Evaluation Corpus
+<details>
+<summary><b>📊 5.3 Verified Ground-Truth Scam Evaluation Corpus (20 Real Attack Vectors)</b></summary>
+<br>
 
 Located inside [`docs/dataset/`](./docs/dataset/), KROH is benchmarked against **20 verified, ground-truth Cambodian attack samples** curated from real-world telemetry:
 
@@ -135,9 +147,12 @@ Located inside [`docs/dataset/`](./docs/dataset/), KROH is benchmarked against *
 | **🎙️ Voice Scams** | 5 Verified Samples | Impersonated police, customs officer, upfront fees | **Colloquial Khmer Audio Transcription** |
 | **📱 Social Scams & APKs** | 5 Verified Samples | Fake lottery, high-yield loan bots, cloned APKs | **RAM SHA256 Stream Hash (0 Disk)** |
 
----
+</details>
 
-## 📚 7. Complete Documentation Hub
+<details>
+<summary><b>📚 5.4 Complete Documentation Hub & Team CHBAS Execution Roster</b></summary>
+<br>
+
 All core venture documentation is organized inside [`docs/`](./docs/) for peer review and judging:
 
 | Document | Description |
@@ -151,9 +166,7 @@ All core venture documentation is organized inside [`docs/`](./docs/) for peer r
 | 🎬 **[`RECREATE_PROMPT.md`](./RECREATE_PROMPT.md)** | **Master UI Recreate Spec:** Complete design tokens, ambient video, and 4-view SPA layout. |
 | 🧠 **[`context/AGENT.md`](./context/AGENT.md)** | **Master Cognitive Brain:** Context contract, operator profile, and technical constraints. |
 
----
-
-## 👥 8. Team CHBAS (ច្បាស់ ច្បាស់) Execution Roster
+#### 👥 Team CHBAS (ច្បាស់ ច្បាស់) Execution Roster
 
 | Member | Role | Primary Hackathon Responsibility |
 | :--- | :--- | :--- |
@@ -162,24 +175,23 @@ All core venture documentation is organized inside [`docs/`](./docs/) for peer r
 | **Heng** | **Audio & Forensics Lead** | Spoken Voice Scam Transcripts, Acoustic Anomaly Signals & Confusion Matrices. |
 | **Bot** | **Software Engineer** | Bank Slip OCR Forensics, EMVCo KHQR Checksums, Telegram Interaction Flow. |
 
+</details>
+
 ---
 
-## 🛠️ 9. Quick Start & Local Development
+## 🛠️ 6. Quick Start & Local Development
 
 ```bash
 # Clone the staging repository
-git clone https://github.com/christpor/kroh-ai-hackathon.git
-cd kroh-ai-hackathon
+git clone https://github.com/christpor/kroh-ai-hackathon.git && cd kroh-ai-hackathon
 
-# Serve the presentation and interactive radar locally
+# Serve the presentation slides and interactive radar locally
 python3 -m http.server 3333
-
-# Open in browser
-open http://localhost:3333/slides
+# Open in browser: http://localhost:3333/slides
 ```
 
 ---
 
-## ⚖️ 10. License & Confidentiality
+## ⚖️ 7. License & Confidentiality
 © 2026 **Team CHBAS (Christpor Rin, Lundy, Heng, Bot)**. All rights reserved.  
 *Venture engineering artifact prepared for the AUPP - ITM Innovation Hackathon 2026.*
