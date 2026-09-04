@@ -103,7 +103,8 @@ All core venture documentation is organized inside [`docs/`](./docs/) for peer r
 | 📄 **[`docs/PRD.md`](./docs/PRD.md)** | **Product Requirements Document:** In-Scope 1-week MVP, non-goals, and verification metrics. |
 | 🏛️ **[`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)** | **Technical Architecture:** Deep-dive into sub-50ms heuristics and Gemini 3.1 Lite integration. |
 | 💰 **[`docs/BUSINESS_MODEL.md`](./docs/BUSINESS_MODEL.md)** | **Monetization & Unit Economics:** B2C Free public utility vs B2B Banking Threat Feed API ($500–$2,500/mo). |
-| 🗄️ **[`docs/schema.sql`](./docs/schema.sql)** | **Database Schema:** PostgreSQL telemetry table, heuristic indicator cache, and Row-Level Security (RLS). |
+| 🗄️ **[`docs/ERD.md`](./docs/ERD.md)** | **Entity Relationship Diagram:** 7-table data topology, HMAC 0-PII hashing, and append-only audit controls. |
+| ⚙️ **[`docs/schema.sql`](./docs/schema.sql)** | **Database DDL Schema:** PostgreSQL 15+ tables, GIN indexes, RLS policies, and sanitized public threat feed. |
 | 📊 **[`docs/dataset/`](./docs/dataset/)** | **Ground-Truth Scam Dataset:** 20 verified Cambodian fraud samples (URLs, Slips, Voice Notes, Social Scams). |
 | 🎬 **[`RECREATE_PROMPT.md`](./RECREATE_PROMPT.md)** | **Master UI Recreate Spec:** Complete design tokens, ambient video, and 4-view SPA layout. |
 | 🧠 **[`context/AGENT.md`](./context/AGENT.md)** | **Master Cognitive Brain:** Context contract, operator profile, and technical constraints. |
