@@ -1,15 +1,15 @@
 # ⚡ STATE.md — Short-Term Working Memory & Sprint State
 > **Project:** KROH (ក្រោះ) — Autonomous Citizen Anti-Scam Shield  
 > **Team:** Team CHBAS (ច្បាស់ ច្បាស់) • AUPP - ITM Innovation Hackathon 2026  
-> **Last Updated:** 2026-09-05T01:08:00+07:00 • Phnom Penh, Cambodia
+> **Last Updated:** 2026-09-05T01:45:00+07:00 • Phnom Penh, Cambodia
 
 ---
 
 ## 🎯 1. Active Sprint Status
 * **Sprint Goal:** 1-Week Hackathon MVP — Multimodal Telegram Shield + Web Admin Mission Control.
-* **Latest Verified Commit:** `dcc26c1` (`docs: enrich tech stack tables...`)
+* **Latest Verified Commit:** `fd7d3d0` (`feat(database): publish complete 7-entity ERD specification...`)
 * **Repository:** [`https://github.com/christpor/kroh-ai-hackathon`](https://github.com/christpor/kroh-ai-hackathon) (Public)
-* **Current Phase:** ERD & Database Hardening Complete ➔ Backend Bot Scaffolding
+* **Current Phase:** ERD & Database Hardening Complete ➔ Backend Bot Gateway Scaffolding
 
 ---
 
@@ -27,7 +27,9 @@
 ---
 
 ## 🛑 3. Active Blockers & Critical Constraints
-* **Blockers:** None. All documentation, database schemas (`docs/schema.sql`), and ground truth datasets (`docs/dataset/`) are locked.
+* **Blockers:** None. Schema v2.0 (`docs/schema.sql`) and [`docs/ERD.md`](../docs/ERD.md) are locked.
 * **Hard Rule 1:** Cloud Run deployment must strictly use `--min-instances=0 --no-cpu-boost` (zero idle compute bill).
 * **Hard Rule 2:** Telegram bot webhook must fast-ACK within 20ms to prevent Telegram retry loops.
 * **Hard Rule 3:** Ephemeral RAM streaming for all files (`.apk`, `.pdf`); 0 bytes saved to container disk.
+* **Hard Rule 4:** 0-PII Salted HMAC (`HMAC_SHA256(chat_id, TELEGRAM_SALT_SECRET)`—never raw numeric IDs).
+* **Hard Rule 5:** Append-Only DB Security (`admin_audit_logs` has zero UPDATE/DELETE permissions).

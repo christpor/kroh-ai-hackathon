@@ -63,7 +63,7 @@ Primary Target: AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026)
 | **Model Discipline** | Default to **Gemini 3.1 Lite / 3.5 Lite / 2.5 Flash** (sub-250ms latency, $0.0001/call, Temperature: 0.0–0.1). Zero heavy model bloat. |
 | **Design Aesthetic** | Pure White (`#ffffff`), soft slate surface (`#f8fafc`), single emerald accent (`#059669`), tight tracking. Zero rainbow AI slop. |
 | **Khmer Typography** | Font: `Kantumruy Pro` | Weight: **600 (Semibold)** | Line-height: **`leading-[1.45]`** (Prevents vowel mark clipping). |
-| **Code & Stack** | **TypeScript (Strict)**, React 18, Vite, Tailwind CSS, Node.js Telegraf, Supabase PostgreSQL, Vercel CLI. |
+| **Code & Stack** | **TypeScript (Strict)**, Next.js 15, Node.js 22 LTS, Fastify, Telegraf, Supabase, Cloud Run, Firebase Auth. |
 | **Testing & Deployment** | Zero code ships untested (`npm run build`). Every milestone is pushed via `gh` and deployed to production on Vercel. |
 
 ---
@@ -91,7 +91,7 @@ Primary Target: AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026)
 - ⚡ [`context/STATE.md`](./STATE.md) — Short-Term Sprint Memory & Workstream Queue (≤50 lines)
 - 🤖 [`AGENTS.md`](file:///home/christ/projects/AGENTS.md) — Root Router File (≤50 lines)
 - 👤 [`context/USER.md`](file:///home/christ/projects/context/USER.md) & 🔮 [`context/SOUL.md`](file:///home/christ/projects/context/SOUL.md) — Operator Profile & Execution Rules
-- 🏛️ [`docs/`](../docs/) — Deep Tech Specs Hub (PRD, Architecture, Schemas, Dataset)
+- 🏛️ [`docs/`](../docs/) — Deep Tech Specs Hub (PRD, Architecture, ERD, Schemas, Dataset)
 
 ---
 *Maintained by Christpor Rin & Antigravity AI Partner • Clean, Byte-Stable Context*
