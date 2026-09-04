@@ -34,6 +34,8 @@ graph TD
   classDef victim fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#991b1b;
   classDef shield fill:#ecfdf5,stroke:#10b981,stroke-width:2px,color:#065f46;
   classDef radar fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px,color:#0369a1;
+  classDef admin fill:#1e293b,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+  classDef auth fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff;
 
   subgraph The Problem [⚠️ The Daily Cambodian Reality: Millions Lost to Scams]
     Victim([👤 Citizen / Elder / Shopkeeper]):::victim -->|Receives Cloned Bank Link / Fake Loan / Voice Scam| Trap[Scammer Demands Upfront Fee, OTP, or Password]
@@ -48,8 +50,15 @@ graph TD
     VoiceAlert --> Victim
   end
 
+  subgraph Mission Control [💻 Web Admin Mission Control /admin]
+    TeamCHBAS([👥 Team CHBAS Command]):::admin -->|Firebase Auth Google Sign-In| FireGate[🔒 Firebase Auth Gate & Whitelist]:::auth
+    FireGate --> AdminHub[🎛️ Live Threat Moderation & Prompt Tuner]:::admin
+    AdminHub -->|Hot-Reload Overrides 30s TTL| Bot
+  end
+
   subgraph National Collective Immunity [📡 Live Community Threat Radar]
     Gate2 & Gate3 --> TelemetryStream[(Supabase PostgreSQL)]
+    AdminHub -->|1-Click MPTC Alert & Blacklist Update| TelemetryStream
     TelemetryStream --> LiveRadarMap[🌐 Live Threat Radar on Vercel<br/>Broadcasts new scam domain to banks in 15min]:::radar
   end
 ```
@@ -70,13 +79,14 @@ Scammers constantly invent new stories (fake Facebook Live lottery, urgent hospi
 
 ---
 
-## 🏛️ 4. The Two-Stage Engineering Architecture
+## 🏛️ 4. The Multi-Tier Engineering Architecture
 
 | Layer | Technology | Function | Cost & Latency |
 | :--- | :--- | :--- | :--- |
 | **Stage 1: Deterministic Engine** | Node.js, RDAP DNS, EMVCo CRC16, Crypto SHA256 | Filters out 98.5% of harmless chat; verifies domain age and QR checksums | **Sub-50ms / $0.0000** |
 | **Stage 2: Vernacular AI Brain** | **Gemini 3.1 Lite / 2.5 Flash** (`@google/genai`) | Multimodal vision for fake slips; native Khmer audio transcription | **180ms / $0.0001** |
 | **Stage 3: Telemetry & Radar** | **Supabase PostgreSQL 15+** | 0-PII anonymous threat feed logging; real-time broadcast to banks | **Sub-100ms / $0.00** |
+| **Stage 4: Mission Control** | **Next.js 15, Firebase Auth, RBAC** | Live prompt tuning, false-positive overrides, and zero-day blacklist | **Sub-50ms / Realtime** |
 
 ---
 

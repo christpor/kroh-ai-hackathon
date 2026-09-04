@@ -41,6 +41,19 @@ Every day in Cambodia, citizens lose millions of dollars to phishing links (`aba
 - Public search bar: *"Check any phone number, telegram handle, or link"*.
 - Live telemetry counters: *Scams Blocked Today*, *Top Target Institutions*.
 
+### C. 💻 Web Admin Mission Control (`/admin`)
+1. **Zero-Trust Firebase Authentication:**
+   - Secured by Firebase Auth (Google Sign-In) with strict email whitelist (`ADMIN_ALLOWED_EMAILS`).
+   - Role-Based Access Control (RBAC): Superadmin (Por), Data Science (Lundy & Heng), Software Engineer (Bot).
+2. **Live Threat Moderation & 1-Click Overrides:**
+   - Real-time stream of incoming scam classifications with 1-click false-positive overrides.
+   - 1-click incident packaging and automated export for MPTC Anti-Cybercrime reporting.
+3. **AI Brain & Prompt Studio:**
+   - Live browser tuning of Gemini 3.1 Lite system prompts, urgency sensitivity, and vernacular Khmer alert templates.
+   - Dynamic hot-reloading across all Cloud Run bot instances with 30-second in-memory cache TTL.
+4. **Deterministic Registry Manager:**
+   - Instant addition and removal of blacklisted Cambodian phone numbers, ABA/Wing accounts, and phishing domains.
+
 ---
 
 ## 3. Explicit Non-Goals for Hackathon (Scope Control)
