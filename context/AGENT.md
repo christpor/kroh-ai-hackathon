@@ -87,11 +87,11 @@ Primary Target: AUPP - ITM Innovation Hackathon 2026 (Sept 12–19, 2026)
 
 ## 📂 5. COGNITIVE LAYER DIRECTORY MAP
 
+- 🧠 [`context/AGENT.md`](./AGENT.md) — Long-Term Venture Ledger & Architecture (≤100 lines)
+- ⚡ [`context/STATE.md`](./STATE.md) — Short-Term Sprint Memory & Workstream Queue (≤50 lines)
 - 🤖 [`AGENTS.md`](file:///home/christ/projects/AGENTS.md) — Root Router File (≤50 lines)
-- 👤 [`context/USER.md`](file:///home/christ/projects/context/USER.md) — The Operator Profile (Christpor Rin)
-- 🔮 [`context/SOUL.md`](file:///home/christ/projects/context/SOUL.md) — AI Temperament, 7-Rung Ladder & Execution Rules
-- 🤖 [`context/IDENTITY.md`](file:///home/christ/projects/context/IDENTITY.md) — Agent Position, Role & Tool Boundaries
-- 🧠 [`context/AGENT.md`](file:///home/christ/projects/context/AGENT.md) — Master Venture Ledger & Architecture
+- 👤 [`context/USER.md`](file:///home/christ/projects/context/USER.md) & 🔮 [`context/SOUL.md`](file:///home/christ/projects/context/SOUL.md) — Operator Profile & Execution Rules
+- 🏛️ [`docs/`](../docs/) — Deep Tech Specs Hub (PRD, Architecture, Schemas, Dataset)
 
 ---
 *Maintained by Christpor Rin & Antigravity AI Partner • Clean, Byte-Stable Context*

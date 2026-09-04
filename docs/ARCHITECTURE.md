@@ -94,3 +94,50 @@ graph TD
 
 ### 3.3 1-Click Law Enforcement & MPTC Export
 - When an administrator confirms an active zero-day phishing campaign on `/admin`, a single click formats the incident into an MPTC-compliant JSON payload (timestamp, domain registrar, IP host, victim screenshot hash) ready for automated dispatch to the Anti-Cybercrime Department.
+
+---
+
+## 4. Google Cloud Run High-Concurrency Engine & Fast-ACK Webhook
+
+### 4.1 Production Hosting Topology (Singapore Edge)
+To ensure sub-35ms ping latency for Cambodian citizens on Smart Axiata and Cellcard networks, all compute and data services are co-located in Singapore:
+* **Web Frontend & Live Radar:** Vercel Edge Network (`sin1` Singapore).
+* **Bot Gateway & Compute:** Google Cloud Run (`asia-southeast1` Singapore).
+* **Telemetry Database:** Supabase PostgreSQL 15+ (`ap-southeast-1` Singapore).
+
+### 4.2 Fast-ACK Webhook Pattern (Anti-Retry Storm)
+Telegram Bot API enforces a strict 5-second HTTP timeout. If multimodal analysis of a fraudulent payment slip or audio file takes 1.5 seconds under high load, standard bots timeout, triggering Telegram to retry sending the update up to 3 times—leading to an exponential crash.
+KROH implements the **Fast-ACK Architecture**:
+1. **Instant Acknowledgment:** The Cloud Run webhook receives the Telegram update, validates the secret token, and returns `HTTP 200 OK` in **<15ms**.
+2. **Asynchronous Background Pipeline:** The incoming payload (URL, image, voice note, or APK stream) is dispatched to the Stage 1 Heuristics and Stage 2 Gemini pipelines asynchronously.
+3. **Proactive Telegram Outbound Push:** Once the Khmer voice note and risk verdict are generated, the engine proactively dispatches them to the chat via `telegram.sendMessage` / `telegram.sendVoice`.
+
+### 4.3 Scale-to-Zero & 80-Concurrency Optimization
+Following proven production standards from the **Kapi** project:
+```bash
+gcloud run deploy kroh-backend \
+  --source . \
+  --region asia-southeast1 \
+  --allow-unauthenticated \
+  --port 8080 \
+  --min-instances=0 \
+  --concurrency=80 \
+  --no-cpu-boost \
+  --memory 512Mi \
+  --set-env-vars="NODE_ENV=production,REGION=asia-southeast1"
+```
+* **Zero Idle Cost (`--min-instances=0`):** Costs $0.00/month during low-traffic overnight hours.
+* **Burst Scaling:** Each container handles up to **80 concurrent requests** simultaneously. When a viral scam hits large public groups, Cloud Run automatically scales to 10+ instances in seconds to absorb 800+ concurrent verifications.
+
+### 4.4 Supabase PgBouncer Transaction Pooling
+To prevent connection exhaustion when multiple serverless Cloud Run instances burst, all database traffic routes through Supabase's transaction pooler on **port 6543**. Over 10,000 serverless invocations safely multiplex across a clean pool of persistent PostgreSQL connections.
+
+### 4.5 The 8-Tier Production Tech Stack
+1. **Frontend:** Next.js 15 (App Router), React 18, Tailwind CSS, Lucide Icons.
+2. **Typography:** Kantumruy Pro (Khmer 600 weight, `leading-[1.45]`), Inter.
+3. **Identity & Auth:** Firebase Auth (Google Sign-In), Firebase Admin SDK, strict email whitelist.
+4. **Bot Gateway:** Node.js 22 LTS, Fastify (70k+ req/sec), Telegraf.
+5. **Compute & Edge:** Google Cloud Run (`asia-southeast1`), Vercel Edge (`sin1`).
+6. **In-Memory Cache:** Node-Cache / Quick-LRU (30s config TTL), Node.js native `crypto`.
+7. **Database:** Supabase PostgreSQL 15+, PgBouncer Transaction Pooler, Row-Level Security.
+8. **Vernacular AI:** Google Gemini 3.1 Lite & 2.5 Flash (`@google/genai`).
